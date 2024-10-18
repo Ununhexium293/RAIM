@@ -26,4 +26,3 @@
    
 
 (Si des modifications sont à faire ne pas hésiter à les faire)
-# RIM
