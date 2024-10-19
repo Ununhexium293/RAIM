@@ -1,0 +1,27 @@
+La table qui joint les id de recette et id d'ingredient avec quantité est de la forme :
+
+id={ID_RECETTE} / ing=[({ID_INGREDIENT},{QUANTITE})];
+
+si on est sur la derniere ligne on remplace le ";" par absolument rien pour pouvoir rajouter des ligne sans tout reecrire
+le nombre de couple ({ID_INGREDIENT},{QUANTITE}) peut aller jusqu'a 64 et doivent etre séparé par des virgules tel sous la forme :
+
+[({ID_INGREDIENT1},{QUANTITE1}),({ID_INGREDIENT2},{QUANTITE2}),({ID_INGREDIENT3},{QUANTITE3})]
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+La table qui joint les id d'ingredient, les unité et les nom est de la forme :
+
+id={ID_INGREDIENT} qt={UNITE_INGREDIENT} nom="{NOM}";
+
+si on est sur la derniere ligne on remplace le ";" par autre chose peu importe tant que c'est un char en utf-8
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+La table qui joint tout les id de recette a leur nom est de la forme :
+
+id={ID_RECETTE} / "{NOM_RECETTE}";
+
+si on est sur la derniere ligne on remplace le ";" par autre chose peu importe tant que c'est un char en utf-8
+
+
+

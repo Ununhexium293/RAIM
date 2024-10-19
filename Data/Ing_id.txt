@@ -1,0 +1,3 @@
+id=1 qt=g nom="Farine";
+id=2 qt=g nom="Beurre";
+id=3 qt=n nom="Oeufs"!
