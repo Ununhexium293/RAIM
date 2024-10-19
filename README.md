@@ -16,9 +16,9 @@
 ## à faire
 
   1. Gérer les sauvegardes
-     1. pouvoir créer un fchier de sauvegarde
-     2. pouvoir lire, écrire et modifier les sauvegarde
-  2. écrire les algorithmes qui vons manipuler les données
+     1. pouvoir créer un fichier de sauvegarde
+     2. pouvoir lire, écrire et modifier les sauvegardes
+  2. écrire les algorithmes qui vont manipuler les données
      1. génération aléatoire d'une liste de recette
      2. recherche de recette en fonction d'ingrédients
      3. etc...
