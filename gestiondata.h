@@ -103,7 +103,7 @@ void input_recipe(Recette recette){
 
 void delete_recipe(Recette recette){
     /*Bon le code est vrm pas compliqué mais c'est pour mieu lire par la suite quand on aura des fonctions dans des fonctions*/
-    ListeRec[recette.id-1] = -1;
+    ListeRec[recette.id-1].id = -1;
     return;
 }
 
@@ -128,7 +128,7 @@ void fill_void_database(){
     return;
 }
 
-void print_recette_database(int id_recette){
+void print_ligne_database(int id_recette){
     /*J'ouvre tmp_database.txt en add*/
     FILE * fmodif;
     fmodif = fopen("./Data/tmp_database.txt","a");
@@ -163,7 +163,7 @@ void print_database(){
     int i;
     for(i=0;i<NOMBRE_RECETTE;i++){
         /*On print chaque recette 1 a 1 pour plus de lisibilité*/
-        print_recette_database(i+1);
+        print_ligne_database(i+1);
     }
     /*Je supprime database.txt pour renommer tmp_database.txt afin de remplacer l'ancienne database par la nouvelle*/
     remove("Data/database.txt");
