@@ -30,6 +30,11 @@ tab_nom_recette_t *init_tab_nom_recette(int nb_recette){
 
     char **tab_recette = malloc(sizeof(char*) * (nb_recette + 5)); //on ajoute quelques emplacemnet libre en plus si jamais on souhaite faire de petits ajouts
 
+    if (tab_recette == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+
     tab_nom -> tb_recette = tab_recette;
     tab_nom -> nb_recette = nb_recette;
     tab_nom -> taille_tab = nb_recette + 5;
@@ -58,6 +63,10 @@ void add_tab_nom_recette(tab_nom_recette_t *tab_nom, char *nom_recette){
         
         char **tab_recette = malloc(sizeof(char*) * (tab_nom -> taille_tab) * 2);
 
+        if (tab_recette == NULL){
+            exit(EXIT_FAILURE);
+        }
+
         
         for (int i = 0; i < tab_nom -> taille_tab; i++){       //copie l'ancien tableau dans le nouveau
             tab_recette[i] = tab_nom -> tb_recette[i];
@@ -70,32 +79,13 @@ void add_tab_nom_recette(tab_nom_recette_t *tab_nom, char *nom_recette){
     }
 
     char *nom_recette_bis = malloc(sizeof(char) * len_string(nom_recette) + 1);
+
+    if (nom_recette_bis == NULL){
+        exit(EXIT_FAILURE);
+    }
+
     cp_string(nom_recette, nom_recette_bis);
 
     tab_nom -> tb_recette[tab_nom -> nb_recette] = nom_recette_bis;
     tab_nom -> nb_recette += 1;
-
-
-    /*debug / test*/
-
-    printf("test ligne 84\n");
-    printf("%s\n", nom_recette);
-    printf("%s\n\n", tab_nom -> tb_recette[tab_nom -> nb_recette - 1]);
-
-    /*fin debug / test*/
-}
-
-
-int main(void){
-    tab_nom_recette_t *tab_nom = init_tab_nom_recette(0);
-    
-    add_tab_nom_recette(tab_nom, "bonjour1");
-    add_tab_nom_recette(tab_nom, "bonjour2");
-    add_tab_nom_recette(tab_nom, "bonjour3");
-    add_tab_nom_recette(tab_nom, "bonjour4");
-    add_tab_nom_recette(tab_nom, "bonjour5");
-    add_tab_nom_recette(tab_nom, "bonjour6");
-    add_tab_nom_recette(tab_nom, "bonjour7");
-
-    free_tab_nom_recette(tab_nom);
 }
