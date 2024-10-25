@@ -1,0 +1,3 @@
+qt=g nom="Farine";
+qt=g nom="Beurre";
+qt=n nom="Oeufs"

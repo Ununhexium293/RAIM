@@ -32,5 +32,5 @@
 
 ## chargemnet des datas
 
-au lancement - charger recette recette et inventaire
+  au lancement - charger recette(noms) et inventaire
 
