@@ -26,3 +26,10 @@
    
 
 (Si des modifications sont à faire ne pas hésiter à les faire)
+
+
+
+
+## chargemnet des datas
+
+au lancement - charger recette recette et inventaire

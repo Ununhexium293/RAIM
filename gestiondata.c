@@ -5,6 +5,8 @@
 
 //#include "write.c"
 
+//fait____________________________________________________________________
+
 typedef struct Ingredient_{
     /*Relie des ingredient a ses quantités*/
     int id_ingredient;
@@ -18,6 +20,8 @@ typedef struct Recette_{
     Ingredient liste[MAX_INGREDIENTS];
     int nb_ing;
 }Recette;
+
+//__________________________________________________________________________
 
 
 
