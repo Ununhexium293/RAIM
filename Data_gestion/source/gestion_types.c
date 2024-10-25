@@ -24,3 +24,35 @@ void free_tab_nom_recette(tab_nom_recette_t *tab_nom){
     free(tab_nom -> tb_recette);
     free(tab_nom);
 }
+
+/*ajoute une entrée dans dans le tableau tab_recette*/
+void add_tab_nom_recette(tab_nom_recette_t *tab_nom, char *nom_recette){
+
+    if (tab_nom -> nb_recette == tab_nom -> taille_tab){     //Si il n'y a plus de place dans le tableau, on double la taille de celui-ci et on ajoute ensuite ce que l'on voulais ajouter
+
+        char **tab_recette = malloc(sizeof(char*) * (tab_nom -> taille_tab) * 2);
+
+        
+        for (int i = 0; i < taille_tab; i++){       //copie l'ancien tableau dans le nouveau
+            tab_recette[i] = tab_nom -> tb_recette[i];
+        }
+
+        tab_nom -> taille_tab *= 2;
+
+        free(tab_nom -> tb_recette);
+        tab_nom -> tb_recette = tab_recette;
+    }
+
+    tab_nom -> tb_recette[nb_recette] = nom_recette;
+    tab_nom -> nb_recette += 1;
+
+
+    /*debug / test*/
+
+    printf("test ligne 30\n";)
+    printf("%s\n", nom_recette);
+    printf("%s\n", tab_nom -> tb_recette[nb_recette]);
+
+    /*fin debug / test*/
+}
+
