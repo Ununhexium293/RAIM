@@ -19,3 +19,8 @@ tab_nom_recette_t *init_tab_nom_recette(int nb_recette){
     return tab_nom;
 }
 
+/*libere la memoire allouée au tableau dynamique*/
+void free_tab_nom_recette(tab_nom_recette_t *tab_nom){
+    free(tab_nom -> tb_recette);
+    free(tab_nom);
+}
