@@ -21,6 +21,12 @@ tab_nom_recette_t *init_tab_nom_recette(int nb_recette){
 
 /*libere la memoire allouée au tableau dynamique*/
 void free_tab_nom_recette(tab_nom_recette_t *tab_nom){
+
+    /*pas sur d'en avoir besoin*/
+    //for (int i = 0; i < nom_recette -> nb_recette; i++){
+    //    free(tab_nom -> recette[i]);
+    //}
+
     free(tab_nom -> tb_recette);
     free(tab_nom);
 }
