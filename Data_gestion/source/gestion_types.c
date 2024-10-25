@@ -34,7 +34,6 @@ tab_nom_recette_t *init_tab_nom_recette(int nb_recette){
         exit(EXIT_FAILURE);
     }
 
-
     tab_nom -> tb_recette = tab_recette;
     tab_nom -> nb_recette = nb_recette;
     tab_nom -> taille_tab = nb_recette + 5;
