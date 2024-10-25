@@ -62,3 +62,9 @@ void add_tab_nom_recette(tab_nom_recette_t *tab_nom, char *nom_recette){
     /*fin debug / test*/
 }
 
+int main(void){
+    tab_nom_recette_t *tab_nom = init_tab_nom_recette(0);
+    add_tab_nom_recette(tab_nom, "bonjour");
+
+    free_tab_nom_recette(tab_nom);
+}
