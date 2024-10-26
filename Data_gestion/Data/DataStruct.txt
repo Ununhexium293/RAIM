@@ -1,4 +1,5 @@
 -----COMMENT LIRE LES DONNÉES DU TXT-----
+#LA PREMIERE LIGNE DE CHAQUE TXT SERA "elem {NOMBRE D'ÉLEMENT} :"
 
 La table qui joint les id de recette et id d'ingredient avec quantité est de la forme :
 
