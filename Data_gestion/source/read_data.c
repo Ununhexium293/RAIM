@@ -21,8 +21,6 @@ void read_database(tab_recette_ingredients * ListeRec){
     int i = 0;
     char virg;
     while(feof(f) != 0){
-        fscanf(f,"id=%d / ing=[",&ListeRec->recette_ingredients[i].id_recette);
-
         int j = 0;
         while(virg != ']'){
             fscanf(f,"(%d:%d)%c",&ListeRec->recette_ingredients[i].tab_ingredient_quantite[j].id_ingredient,&ListeRec->recette_ingredients[i].tab_ingredient_quantite[j].quantite,&virg);

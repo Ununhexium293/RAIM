@@ -33,6 +33,8 @@ typedef struct tab_ingredient_nom_unite_{
 
 //_____________________________COUPLE INGREDIENT QUANTITE_____________________________
 /*Structure contenant un ingrédient et sa quantité numerique associée*/
+/*ATTETION : ICI EXCEPTIONNELLEMENT JE FORCE D'AVOIR UN ID INGREDIENT POUR POUVOIR ETRE REUTILISE POUR LES RECETTE ET PAS AVOIR UN 
+TABLEAU DE INT DE TAILLE NOMBRE TOTAL DINGREDIENT POUR CHAQUE RECETTE*/
 typedef struct ingredient_quantite_{
     int id_ingredient;
     int quantite;
@@ -53,7 +55,6 @@ typedef struct tab_ingredients_{
 
 /*Structure contenant un id de recette, un tableau d'ingredient, le nombre d'ingredient et la taille du tableau d'ingredient*/
 typedef struct recette_ingredients_{
-    int id_recette;
     int taille_tab_ingredient;
     int nb_ingredient;
     ingredient_quantite * tab_ingredient_quantite;
