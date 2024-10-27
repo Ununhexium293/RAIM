@@ -3,9 +3,12 @@
 #include "struct.h"
 
 
+//_____________________________________LES PATHS SONT ECRIT DEPUIS RIM_____________________________________
+
+
 /*Charge les données du fichier database.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
 void read_database(tab_recette_ingredients * ListeRec){
-    FILE * f = fopen("./../Data/database.txt","r");
+    FILE * f = fopen("./Data_gestion/Data/database.txt","r");
     if(f==NULL){
         fclose(f);
         printf("[ERROR] file not found\n");
@@ -20,14 +23,18 @@ void read_database(tab_recette_ingredients * ListeRec){
 
     int i = 0;
     char virg;
-    while(feof(f) != 0){
+    while(1){
         int j = 0;
         while(virg != ']'){
             fscanf(f,"(%d:%d)%c",&ListeRec->recette_ingredients[i].tab_ingredient_quantite[j].id_ingredient,&ListeRec->recette_ingredients[i].tab_ingredient_quantite[j].quantite,&virg);
             j++;
         }
-        fscanf(f,";\n");
+        ListeRec->recette_ingredients->nb_ingredient = j;
         i++;
+        if(feof(f) != 0){
+            break;
+        }
+        fscanf(f,";\n");
     }
     
     ListeRec->nb_recette = i;
@@ -36,7 +43,7 @@ void read_database(tab_recette_ingredients * ListeRec){
 
 /*Charge les données du fichier recette.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
 void read_recette(tab_nom_recette_t * ListeNom){
-    FILE * f = fopen("./../Data/recette.txt","r");
+    FILE * f = fopen("./Data_gestion/Data/recette.txt","r");
     if(f==NULL){
         fclose(f);
         printf("[ERROR] file not found\n");
@@ -61,7 +68,7 @@ void read_recette(tab_nom_recette_t * ListeNom){
 
 /*Charge les données du fichier inventaire.txt dans un tableau contenu dans la struct tab_inventaire*/
 void read_inventaire(tab_ingredients * Inventaire){
-    FILE * f = fopen("./../Data/inventaire.txt","r");
+    FILE * f = fopen("./Data_gestion/Data/inventaire.txt","r");
     if(f==NULL){
         fclose(f);
         printf("[ERROR] file not found\n");
@@ -86,7 +93,7 @@ void read_inventaire(tab_ingredients * Inventaire){
 
 /*Charge les données du fichier ingredient.txt dans un tableau contenu dans la struct tab_ingredient_nom_unite*/
 void read_ingredient(tab_ingredient_nom_unite * ListeIng){
-    FILE * f = fopen("./../Data/ingredient.txt","r");
+    FILE * f = fopen("./Data_gestion/Data/ingredient.txt","r");
     if(f==NULL){
         fclose(f);
         printf("[ERROR] file not found\n");
