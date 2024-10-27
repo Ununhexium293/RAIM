@@ -17,7 +17,19 @@ typedef struct tab_nom_ingredient_{
     int taille_tab;
 }tab_nom_ingredient_t;
 
+//_____________________________COUPLE INGREDIENT NOM - UNITE (tbh jsp ça sert a quoi)_____________________________
+/*Structure liant le nom d'un ingredient a son unité de mesure*/
+typedef struct ingredient_nom_unite_{
+    char * nom;
+    /*l'unité sera uniquement composé d'un char pour des raison de mémoire occupée et c'est amplement suffisant d'ailleur*/
+    char unite;
+}ingredient_nom_unite;
 
+typedef struct tab_ingredient_nom_unite_{
+    ingredient_nom_unite * tab_ingredient_unite;
+    int nb_ingredient;
+    int taille_tab;
+}tab_ingredient_nom_unite;
 
 //_____________________________COUPLE INGREDIENT QUANTITE_____________________________
 /*Structure contenant un ingrédient et sa quantité numerique associée*/
@@ -36,10 +48,10 @@ typedef struct tab_ingredients_{
     ingredient_quantite * tab_ingredient_quantite;
 }tab_ingredients;
 
-//_____________________________TABLEAU DYNAMIQUE POUR LISTE DE RECETTE_____________________________
 
+//_____________________________UNE RECETTE_____________________________
 
-/*Structure contenant un tableau de recette, le nombre de recette et la taille du tableau pour les tableau dynamique*/
+/*Structure contenant un id de recette, un tableau d'ingredient, le nombre d'ingredient et la taille du tableau d'ingredient*/
 typedef struct recette_ingredients_{
     int id_recette;
     int taille_tab_ingredient;
@@ -47,6 +59,8 @@ typedef struct recette_ingredients_{
     ingredient_quantite * tab_ingredient_quantite;
 }recette_ingredients;
 
+
+//_____________________________TABLEAU DYNAMIQUE POUR LISTE DE RECETTE_____________________________
 
 /*Structure pour tableau dynamique de recette_ingredients*/
 typedef struct tab_recette_ingredients_{
