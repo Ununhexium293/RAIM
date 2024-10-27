@@ -1,6 +1,8 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
+
+//_____________________________TABLEAU DE NOMS_____________________________
 /*Tableau dynamique pour stocker les recettes et leur nombre*/
 typedef struct tab_nom_recette_{
     char **tb_recette;
@@ -15,25 +17,43 @@ typedef struct tab_nom_ingredient_{
     int taille_tab;
 }tab_nom_ingredient_t;
 
+
+
+//_____________________________COUPLE INGREDIENT QUANTITE_____________________________
 /*Structure contenant un ingrédient et sa quantité numerique associée*/
 typedef struct ingredient_quantite_{
     int id_ingredient;
     int quantite;
 }ingredient_quantite;
 
-/*Structure contenant un id de recette et un tableau d'ingredients et leur quantité avec*/
-typedef struct recette_ingredients_{
-    int id;
-    int taille_ingredient;
-    ingredient_quantite * liste_ingredient;
-}recette_ingredients;
+
+//_____________________________TABLEAU DYNAMIQUE POUR INVENTAIRE_____________________________
+/*__________NE PAS UTILISER POUR AUTRE CHOSE QU'INVENTAIRE__________*/
+/*Structure pour tableau dynamique de couble ingredient quantite*/
+typedef struct tab_ingredients_{
+    int nb_ingredient;
+    int taille_tab;
+    ingredient_quantite * tab_ingredient_quantite;
+}tab_ingredients;
+
+//_____________________________TABLEAU DYNAMIQUE POUR LISTE DE RECETTE_____________________________
+
 
 /*Structure contenant un tableau de recette, le nombre de recette et la taille du tableau pour les tableau dynamique*/
-typedef struct liste_recette_ingredients_{
+typedef struct recette_ingredients_{
+    int id_recette;
+    int taille_tab_ingredient;
+    int nb_ingredient;
+    ingredient_quantite * tab_ingredient_quantite;
+}recette_ingredients;
+
+
+/*Structure pour tableau dynamique de recette_ingredients*/
+typedef struct tab_recette_ingredients_{
+    recette_ingredients * recette_ingredients;
     int taille_tab;
     int nb_recette;
-    recette_ingredients * tb_recette_ingredients;
-}liste_recette_ingredients;
+}tab_recette_ingredients;
 
 
 

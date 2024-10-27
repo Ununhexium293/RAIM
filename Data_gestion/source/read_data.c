@@ -3,8 +3,8 @@
 #include "struct.h"
 
 
-
-void read_database(liste_recette_ingredients * ListRec){
+/*Charge les données du fichier database.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
+void read_database(tab_recette_ingredients * ListRec){
     FILE * f = fopen("./../Data/database.txt","r");
     if(f==NULL){
         fclose(f);
@@ -21,16 +21,57 @@ void read_database(liste_recette_ingredients * ListRec){
     int i = 0;
     char virg;
     while(feof(f) != 0){
-        fscanf(f,"id=%d / ing=[",&ListRec->tb_recette_ingredients[i].id);
+        fscanf(f,"id=%d / ing=[",&ListRec->recette_ingredients[i].id_recette);
 
         int j = 0;
         while(virg != ']'){
-            fscanf(f,"(%d:%d)%c",&ListRec->tb_recette_ingredients[i].liste_ingredient[j].id_ingredient,&ListRec->tb_recette_ingredients[i].liste_ingredient[j].quantite,&virg);
+            fscanf(f,"(%d:%d)%c",&ListRec->recette_ingredients[i].tab_ingredient_quantite[j].id_ingredient,&ListRec->recette_ingredients[i].tab_ingredient_quantite[j].quantite,&virg);
             j++;
         }
         fscanf(f,";\n");
         i++;
     }
     
-    ListRec->taille_tab = i;
+    ListRec->nb_recette = i;
+    fclose(f);
+}
+
+/*Charge les données du fichier recette.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
+void read_recette(tab_nom_recette_t * ListeNom){
+    FILE * f = fopen("./../Data/recette.txt","r");
+    int i = 0;
+
+    /*Desolé du while 1 mais je peux pas faire autrement vu que jveux pas fscanf(f,";\n") a chaque tour de boucle faut que je m'arrete
+    en plein milieu*/
+    while(1){
+        fscanf(f,"nom '%s'",&ListeNom->tb_recette[i]);
+        i++;
+        if(feof(f)==0){
+            break;
+        }
+        fscanf(f,";\n");
+    }
+
+    fclose(f);
+    return;    
+}
+
+/*Charge les données du fichier inventaire.txt dans un tableau contenu dans la struct tab_inventaire*/
+void read_inventaire(tab_ingredients * Inventaire){
+    FILE * f = fopen("./../Data/inventaire.txt","r");
+    int i = 0;
+
+    /*Desolé du while 1 mais je peux pas faire autrement vu que jveux pas fscanf(f,";\n") a chaque tour de boucle faut que je m'arrete
+    en plein milieu*/
+    while(1){
+        fscanf(f,"ing=%d qt=%d",&Inventaire->tab_ingredient_quantite[i].id_ingredient,&Inventaire->tab_ingredient_quantite[i].quantite);
+        i++;
+        if(feof(f)==0){
+            break;
+        }
+        fscanf(f,";\n");
+    }
+    Inventaire->nb_ingredient = i;
+    fclose(f);
+    return;
 }
