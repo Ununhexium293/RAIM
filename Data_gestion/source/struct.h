@@ -9,8 +9,12 @@ typedef struct tab_string_{
 }tab_string_t;
 
 
-
-
+/*tableau dynamique de tableau d'entier*/
+typedef struct tab_int_{
+    int **tb_int;
+    int nb_int;
+    int taille_tab;
+}tab_int_t;
 
 
 
