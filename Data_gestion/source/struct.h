@@ -48,7 +48,7 @@ typedef struct tab_ingredients_{
 /*Structure contenant un id de recette, un tableau d'ingredient, le nombre d'ingredient et la taille du tableau d'ingredient*/
 typedef struct recette_ingredients_{
     int taille_tab_ingredient;
-    int nb_ingredient;
+    //int nb_ingredient; (c'est un tableau dynamique ou non ?)
     ingredient_quantite * tab_ingredient_quantite;
 }recette_ingredients;
 
@@ -65,26 +65,6 @@ typedef struct tab_recette_ingredients_{
 }tab_recette_ingredients;
 
 /*_________________________________________________________________________________________________________*/
-
-
-
-
-//à supprimer
-/*tableau dynamique de tableau d'entier*/
-//typedef struct tab_int_{
-//    int **tb_int;
-//    int nb_int;
-//    int taille_tab;
-//}tab_int_t;
-
-
-
-
-
-
-
-
-
 
 
 
