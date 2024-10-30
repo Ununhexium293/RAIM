@@ -45,10 +45,10 @@ typedef struct tab_ingredients_{
 
 //_____________________________UNE RECETTE_____________________________
 
-/*Structure contenant un id de recette, un tableau d'ingredient, le nombre d'ingredient et la taille du tableau d'ingredient*/
+/*Structure contenant un id de recette, un tableau d'ingredient, le nombre d'ingredient et la taille du tableau d'ingredient dynamique btw*/
 typedef struct recette_ingredients_{
     int taille_tab_ingredient;
-    //int nb_ingredient; (c'est un tableau dynamique ou non ?)
+    int nb_ingredient; 
     ingredient_quantite * tab_ingredient_quantite;
 }recette_ingredients;
 

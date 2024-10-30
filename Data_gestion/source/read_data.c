@@ -42,7 +42,7 @@ void read_database(tab_recette_ingredients * ListeRec){
 }
 
 /*Charge les données du fichier recette.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
-void read_recette(tab_nom_recette_t * ListeNom){
+void read_recette(tab_string_t * ListeNom){
     FILE * f = fopen("./Data_gestion/Data/recette.txt","r");
     if(f==NULL){
         fclose(f);
@@ -54,7 +54,7 @@ void read_recette(tab_nom_recette_t * ListeNom){
     /*Desolé du while 1 mais je peux pas faire autrement vu que jveux pas fscanf(f,";\n") a chaque tour de boucle faut que je m'arrete
     en plein milieu*/
     while(1){
-        fscanf(f,"nom '%s'",&ListeNom->tb_recette[i]);
+        fscanf(f,"nom '%s'",&ListeNom->tb_string[i]);
         i++;
         if(feof(f)==0){
             break;
