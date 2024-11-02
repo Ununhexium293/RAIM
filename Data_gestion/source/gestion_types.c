@@ -146,7 +146,7 @@ void free_couple_ingr_unit(ingredient_nom_unite_t *couple_ingr_unit){
 
 
 /*initialise un tableau dynamique de couple nom - unite*/
-tab_ingredient_nom_unite_t *init_tab_couple_ingr_unit(int size_tab){
+tab_ingredient_nom_unite_t *init_tab_ingredient_nom_unite(int size_tab){
     tab_ingredient_nom_unite_t *tab_ingredient_nom_unite = malloc(sizeof(tab_ingredient_nom_unite_t));
 
     if (tab_ingredient_nom_unite == NULL){
