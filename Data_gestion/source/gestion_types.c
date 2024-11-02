@@ -253,7 +253,7 @@ int remove_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_n
 
 
 /*initialise un couple id_ingredient - quantite*/
-static ingredient_quantite_t *init_ingredient_quantite(int id, int quantity){
+static ingredient_quantite_t *init_ingredient_quantity(int id, int quantity){
     ingredient_quantite_t *couple = malloc(sizeof(ingredient_quantite_t));
 
     if (couple == NULL){
@@ -264,4 +264,26 @@ static ingredient_quantite_t *init_ingredient_quantite(int id, int quantity){
     couple -> quantite = quantity;
 
     return couple;
+}
+
+
+/*initialise un tableau dynamique de couple id_ingredient - quantite*/
+tab_ingredients_t *init_tab_ingredient(int size_array){
+    tab_ingredients_t *tab_ingredient = malloc(sizeof(tab_ingredients_t));
+
+    if (tab_ingredient == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    ingredient_quantite_t *tab_ingredient_quantite = malloc(sizeof(ingredient_quantite_t) * (size_array + 5))
+
+    if (tab_ingredient_quantite == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    tab_ingredient -> nb_ingredient = size_array;
+    tab_ingredient -> taille_tab = size_array + 5;
+    tab_ingredient -> tab_ingredient_quantite = tab_ingredient_quantite;
+
+    return tab_ingredient;
 }
