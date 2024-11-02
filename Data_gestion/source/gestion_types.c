@@ -142,3 +142,27 @@ void free_couple_ingr_unit(ingredient_nom_unite_t *couple_ingr_unit){
     free(couple_ingr_unit.nom);
     free(couple_ingr_unit);
 }
+
+
+
+/*initialise un tableau dynamique de couple nom - unite*/
+tab_ingredient_nom_unite_t *init_tab_couple_ingr_unit(int size_tab){
+    tab_ingredient_nom_unite_t *tab_ingredient_nom_unite = malloc(sizeof(tab_ingredient_nom_unite_t));
+
+    if (tab_ingredient_nom_unite == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    ingredient_nom_unite_t *tb_ingredient_nom_unite = malloc(sizeof(ingredient_nom_unite_t) * (size_tab + 5));  //on ajoute quelques emplacemnet libre en plus si jamais on souhaite faire de petits ajouts
+
+    if (tb_ingredient_nom_unite == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    tab_ingredient_nom_unite.nb_ingredient = size_tab;
+    tab_ingredient_nom_unite.taille_tab = size_tab + 5;
+    tab_ingredient_nom_unite.tab_ingredient_unite = tb_ingredient_nom_unite;
+
+    return tab_ingredient_nom_unite;
+}
+
