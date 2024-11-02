@@ -5,6 +5,9 @@
 /*_______________________________gestion tableau dynamique___________________________________________*/
 
 
+
+
+
 /*Donne la taille d'un char* */
 static int len_string(char *string){
     int taille = 0;
@@ -20,7 +23,14 @@ static void cp_string(char *donnor, char *reciever){
     }
 }
 
+
+
+
+
 /*________________tab dynamique string____________________*/
+
+
+
 
 
 /*initialise un tableau dynamique de string*/
@@ -101,7 +111,7 @@ int remove_tab_string(tab_string_t *tab_string, int indice){
 
     free(tab_string -> tb_string[indice]);
 
-    for (int i = indice; i < tab_string -> nb_string - 1; i++){
+    for (int i = indice; i < tab_string -> nb_string - 1; i++){     //Comme on suprime un element du tableau, on dessend les élément qui le suivent d'un cran
         tab_string -> tb_string[i] = tab_string -> tb_string[i + 1];
     }
 
@@ -111,7 +121,13 @@ int remove_tab_string(tab_string_t *tab_string, int indice){
 }
 
 
+
+
+
 /*___________________________________tableau dynamique couple nom - unite______________________________________*/
+
+
+
 
 
 /*initialise un couple nom - unite*/
@@ -210,18 +226,42 @@ void add_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom
 /*supprime une entrée du tableau et avance les élément suivants*/
 int remove_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite, int indice){
 
-    if (indice >= tab_ingredient_nom_unite -> nb_ingredient){
+    if (indice >= tab_ingredient_nom_unite -> nb_ingredient){       //On verifie que l'element que l'on souhaite supprimer existe (pourras etre enlever plus tard / fais pour du debug principalement au cas où)
         printf("Impossible de supprimer le couple ingredient nom - unite, indice trop grand.\n");
         return -1;
     }
 
-    free(tab_ingredient_nom_unite -> tab_ingredient_unite[indice]);
+    free_couple_ingr_unit(tab_ingredient_nom_unite -> tab_ingredient_unite[indice]);
 
-    for (int i = indice; i < tab_ingredient_nom_unite -> nb_ingredient - 1; i++){
+    for (int i = indice; i < tab_ingredient_nom_unite -> nb_ingredient - 1; i++){       //Comme on suprime un element du tableau, on dessend les élément qui le suivent d'un cran
         tab_ingredient_nom_unite -> tab_ingredient_unite[i] = tab_ingredient_nom_unite -> tab_ingredient_unite[i + 1];
     }
 
     tab_ingredient_nom_unite -> nb_ingredient -= 1;
 
     return 0;
+}
+
+
+
+
+
+/*___________________________________tableau dynamique couple nom - quantite______________________________________*/
+
+
+
+
+
+/*initialise un couple id_ingredient - quantite*/
+static ingredient_quantite_t *init_ingredient_quantite(int id, int quantity){
+    ingredient_quantite_t *couple = malloc(sizeof(ingredient_quantite_t));
+
+    if (couple == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    couple -> id_ingredient = id;
+    couple -> quantite = quantity;
+
+    return couple;
 }
