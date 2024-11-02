@@ -6,7 +6,7 @@
 
 
 /*Donne la taille d'un char* */
-int len_string(char *string){
+static int len_string(char *string){
     int taille = 0;
     for (; string[taille] != '\0'; taille++);
     return taille;
@@ -14,7 +14,7 @@ int len_string(char *string){
 
 
 /*Permet de copier un string sans copier les adresses*/
-void cp_string(char *donnor, char *reciever){
+static void cp_string(char *donnor, char *reciever){
     for (int i = 0; i <= len_string(donnor); i++){
         reciever[i] = donnor[i];
     }
@@ -115,7 +115,7 @@ int remove_tab_string(tab_string_t *tab_string, int indice){
 
 
 /*initialise un couple nom - unite*/
-ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
+static ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
     ingredient_nom_unite_t *couple = malloc(sizeof(ingredient_nom_unite_t));
 
     if (couple == NULL){
@@ -138,7 +138,7 @@ ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
 
 
 /*libere la memoire alloué à un couple ingredient unite*/
-void free_couple_ingr_unit(ingredient_nom_unite_t *couple_ingr_unit){
+static void free_couple_ingr_unit(ingredient_nom_unite_t *couple_ingr_unit){
     free(couple_ingr_unit -> nom);
     free(couple_ingr_unit);
 }
@@ -176,4 +176,32 @@ void free_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_no
 
     free(tab_ingredient_nom_unite -> tab_ingredient_unite);
     free(tab_ingredient_nom_unite);
+}
+
+
+/*ajoute une entree dans le tableau tab_ingredient_nom_unite*/
+void add_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite, char *name, char unit){
+
+    ingredient_nom_unite_t *couple = init_couple_ingr_unit(name, unit);
+
+    if (tab_ingredient_nom_unite -> nb_ingredient == tab_ingredient_nom_unite -> taille_tab){   //Si il n'y a plus de place dans le tableau, on double la taille de celui-ci
+
+        ingredient_nom_unite_t *tb_ingredient_nom_unite = malloc(sizeof(ingredient_nom_unite_t) * tab_ingredient_nom_unite -> taille_tab * 2);
+
+        if (tb_ingredient_nom_unite == NULL){
+            exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < tab_ingredient_nom_unite -> taille_tab; i++){   //copie l'ancien tableau dans le nouveau
+            tb_ingredient_nom_unite[i] = tab_ingredient_nom_unite -> tab_ingredient_unite[i];
+        }
+
+        tab_ingredient_nom_unite -> taille_tab *= 2;
+
+        free(tab_ingredient_nom_unite -> tab_ingredient_unite);     //On libere la mémoir alloué à l'ancien tableau
+        tab_ingredient_nom_unite -> tab_ingredient_unite = tb_ingredient_nom_unite;
+    }
+
+    tab_ingredient_nom_unite -> tab_ingredient_unite[tab_ingredient_nom_unite -> nb_ingredient] = couple;
+    tab_ingredient_nom_unite -> nb_ingredient += 1;
 }
