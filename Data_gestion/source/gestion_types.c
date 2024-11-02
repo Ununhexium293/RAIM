@@ -205,3 +205,23 @@ void add_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom
     tab_ingredient_nom_unite -> tab_ingredient_unite[tab_ingredient_nom_unite -> nb_ingredient] = couple;
     tab_ingredient_nom_unite -> nb_ingredient += 1;
 }
+
+
+/*supprime une entrée du tableau et avance les élément suivants*/
+int remove_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite, int indice){
+
+    if (indice >= tab_ingredient_nom_unite -> nb_ingredient){
+        printf("Impossible de supprimer le couple ingredient nom - unite, indice trop grand.\n");
+        return -1;
+    }
+
+    free(tab_ingredient_nom_unite -> tab_ingredient_unite[indice]);
+
+    for (int i = indice; i < tab_ingredient_nom_unite -> nb_ingredient - 1; i++){
+        tab_ingredient_nom_unite -> tab_ingredient_unite[i] = tab_ingredient_nom_unite -> tab_ingredient_unite[i + 1];
+    }
+
+    tab_ingredient_nom_unite -> nb_ingredient -= 1;
+
+    return 0;
+}
