@@ -45,7 +45,7 @@ tab_string_t *init_tab_string(int size_tab){
 }
 
 
-/*libere la memoire allouée au tableau dynamique*/
+/*libere la memoire allouée au tableau dynamique de string*/
 void free_tab_string(tab_string_t *tab_string){
 
     for (int i = 0; i < tab_string -> nb_string; i++){
@@ -130,8 +130,8 @@ ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
 
     cp_string(name, name_bis);
 
-    couple.nom = name_bis;
-    couple.unite = unit;
+    couple -> nom = name_bis;
+    couple -> unite = unit;
 
     return couple;
 }
@@ -139,7 +139,7 @@ ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
 
 /*libere la memoire alloué à un couple ingredient unite*/
 void free_couple_ingr_unit(ingredient_nom_unite_t *couple_ingr_unit){
-    free(couple_ingr_unit.nom);
+    free(couple_ingr_unit -> nom);
     free(couple_ingr_unit);
 }
 
@@ -159,10 +159,21 @@ tab_ingredient_nom_unite_t *init_tab_ingredient_nom_unite(int size_tab){
         exit(EXIT_FAILURE);
     }
 
-    tab_ingredient_nom_unite.nb_ingredient = size_tab;
-    tab_ingredient_nom_unite.taille_tab = size_tab + 5;
-    tab_ingredient_nom_unite.tab_ingredient_unite = tb_ingredient_nom_unite;
+    tab_ingredient_nom_unite -> nb_ingredient = size_tab;
+    tab_ingredient_nom_unite -> taille_tab = size_tab + 5;
+    tab_ingredient_nom_unite -> tab_ingredient_unite = tb_ingredient_nom_unite;
 
     return tab_ingredient_nom_unite;
 }
 
+
+/*libere la memoire alloué à un tableau tab_ingredient_nom_unite*/
+void free_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite){
+
+    for (int i = 0; i < tab_ingredient_nom_unite -> nb_ingredient){
+        free_couple_ingr_unit(tab_ingredient_nom_unite -> tab_ingredient_unite[i]);
+    }
+
+    free(tab_ingredient_nom_unite -> tab_ingredient_unite);
+    free(tab_ingredient_nom_unite);
+}
