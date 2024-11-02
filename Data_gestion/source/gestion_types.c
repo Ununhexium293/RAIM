@@ -137,7 +137,8 @@ ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
 }
 
 
-/*initialise un tableau dynamique de couple nom - unite*/
-tab_ingredient_nom_unite_t *init_tab_couple_ingr_unit(void){
-
+/*libere la memoire alloué à un couple ingredient unite*/
+void free_couple_ingr_unit(ingredient_nom_unite_t *couple_ingr_unit){
+    free(couple_ingr_unit.nom);
+    free(couple_ingr_unit);
 }
