@@ -27,6 +27,10 @@ void cp_string(char *donnor, char *reciever){
 tab_string_t *init_tab_string(int size_tab){
     tab_string_t *tab_string = malloc(sizeof(tab_string_t));
 
+    if (tab_string == NULL){
+        exit(EXIT_FAILURE);
+    }
+
     char **tb_string = malloc(sizeof(char*) * (size_tab + 5)); //on ajoute quelques emplacemnet libre en plus si jamais on souhaite faire de petits ajouts
 
     if (tb_string == NULL){
@@ -113,12 +117,27 @@ int remove_tab_string(tab_string_t *tab_string, int indice){
 /*initialise un couple nom - unite*/
 ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
     ingredient_nom_unite_t *couple = malloc(sizeof(ingredient_nom_unite_t));
+
+    if (couple == NULL){
+        exit(EXIT_FAILURE);
+    }
     
     char *name_bis = malloc(sizeof(char) * len_string(name));
+
+    if (name_bis == NULL){
+        exit(EXIT_FAILURE);
+    }
+
     cp_string(name, name_bis);
 
     couple.nom = name_bis;
     couple.unite = unit;
 
     return couple;
+}
+
+
+/*initialise un tableau dynamique de couple nom - unite*/
+tab_ingredient_nom_unite_t *init_tab_couple_ingr_unit(void){
+
 }
