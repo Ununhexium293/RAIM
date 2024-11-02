@@ -105,3 +105,20 @@ int remove_tab_string(tab_string_t *tab_string, int indice){
 
     return 0;
 }
+
+
+/*___________________________________tableau dynamique couple nom - unite______________________________________*/
+
+
+/*initialise un couple nom - unite*/
+ingredient_nom_unite_t *init_couple_ingr_unit(char *name; char unit){
+    ingredient_nom_unite_t *couple = malloc(sizeof(ingredient_nom_unite_t));
+    
+    char *name_bis = malloc(sizeof(char) * len_string(name));
+    cp_string(name, name_bis);
+
+    couple.nom = name_bis;
+    couple.unite = unit;
+
+    return couple;
+}
