@@ -7,7 +7,7 @@
 
 
 /*Charge les données du fichier database.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
-void read_database(tab_recette_ingredients * ListeRec){
+void read_database(tab_recette_ingredients_t * ListeRec){
     FILE * f = fopen("./Data_gestion/Data/database.txt","r");
     if(f==NULL){
         fclose(f);
@@ -67,7 +67,7 @@ void read_recette(tab_string_t * ListeNom){
 }
 
 /*Charge les données du fichier inventaire.txt dans un tableau contenu dans la struct tab_inventaire*/
-void read_inventaire(tab_ingredients * Inventaire){
+void read_inventaire(tab_ingredients_t * Inventaire){
     FILE * f = fopen("./Data_gestion/Data/inventaire.txt","r");
     if(f==NULL){
         fclose(f);
@@ -92,7 +92,7 @@ void read_inventaire(tab_ingredients * Inventaire){
 }
 
 /*Charge les données du fichier ingredient.txt dans un tableau contenu dans la struct tab_ingredient_nom_unite*/
-void read_ingredient(tab_ingredient_nom_unite * ListeIng){
+void read_ingredient(tab_ingredient_nom_unite_t * ListeIng){
     FILE * f = fopen("./Data_gestion/Data/ingredient.txt","r");
     if(f==NULL){
         fclose(f);

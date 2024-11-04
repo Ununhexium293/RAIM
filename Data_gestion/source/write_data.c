@@ -4,7 +4,7 @@
 
 
 /*On remplace les donnée du txt database.txt par celles du tableau dynamique associé*/
-void write_database(tab_recette_ingredients ListeRec){
+void write_database(tab_recette_ingredients_t ListeRec){
     FILE * f = fopen("./Data_gestion/Data/temp_database.txt","w");
     int i = 0;
     char virg = ',';
@@ -44,7 +44,7 @@ void write_recette(tab_string_t ListeNom){
 }
 
 /*On remplace les donnée du txt inventaire.txt par celles du tableau dynamique associé*/
-void write_inventaire(tab_ingredients Inventaire){
+void write_inventaire(tab_ingredients_t Inventaire){
     FILE * f = fopen("./Data_gestion/Data/temp_inventaire.txt","w");
     int i = 0;
     for(;i<Inventaire.nb_ingredient;i++){
@@ -62,7 +62,7 @@ void write_inventaire(tab_ingredients Inventaire){
 
 
 /*On rajoute une ligne a ingredient.txt vu qu'aucune modification n'est autorisée pour pas casser tout les id 🤓*/
-void ajout_ingredient(ingredient_nom_unite NouvelIngredient){
+void ajout_ingredient(ingredient_nom_unite_t NouvelIngredient){
     FILE * f = fopen("./Data_gestion/Data/ingredient.txt","a");
     fprintf(f,";\nqt=%c nom='%s'",NouvelIngredient.unite, NouvelIngredient.nom);
     fclose(f);
