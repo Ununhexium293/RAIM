@@ -84,7 +84,7 @@ void add_tab_string(tab_string_t *tab_string, char *string_e){
 
         tab_string -> taille_tab *= 2;
 
-        free(tab_string -> tb_string);      //On libere la mémoir alloué à l'ancien tableau
+        free(tab_string -> tb_string);      //On libere la mémoire alloué à l'ancien tableau
         tab_string -> tb_string = tb_string_sub;
     }
 
@@ -175,7 +175,7 @@ tab_ingredient_nom_unite_t *init_tab_ingredient_nom_unite(int size_tab){
         exit(EXIT_FAILURE);
     }
 
-    tab_ingredient_nom_unite -> nb_ingredient = size_tab;
+    tab_ingredient_nom_unite -> nb_ingredient = 0;
     tab_ingredient_nom_unite -> taille_tab = size_tab + 5;
     tab_ingredient_nom_unite -> tab_ingredient_unite = tb_ingredient_nom_unite;
 
@@ -281,7 +281,7 @@ tab_ingredients_t *init_tab_ingredient(int size_array){
         exit(EXIT_FAILURE);
     }
 
-    tab_ingredient -> nb_ingredient = size_array;
+    tab_ingredient -> nb_ingredient = 0;
     tab_ingredient -> taille_tab = size_array + 5;
     tab_ingredient -> tab_ingredient_quantite = tab_ingredient_quantite;
 
@@ -341,5 +341,91 @@ int remove_tab_ingredient(tab_ingredients_t *tab_ingredient, int indice){
 
     tab_ingredient -> nb_ingredient -= 1;
 
+    return 0;
+}
+
+
+
+
+
+/*___________________________________tableau dynamique recette ingredient______________________________________*/
+
+
+
+
+
+/*initialise un tableau dynamique de tab_ingredients_t*/
+tab_recette_ingredients_t *init_tab_recette(int size_array, int nb_ingredient){
+    tab_recette_ingredients_t *tab_recette = malloc(sizeof(tab_recette_ingredients_t));
+
+    if (tab_recette == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    tab_ingredients_t *tab_ingredient = malloc(sizeof(tab_ingredients_t) * (size_array + 5));       //on ajoute quelques emplacemnet libre en plus si jamais on souhaite faire de petits ajouts
+
+    if(tab_ingredient = NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    tab_recette -> recette_ingredients = tab_ingredient;
+    tab_recette -> nb_recette = 0;
+    tab_recette -> taille_tab = size_array + 5;
+}
+
+
+/*libere la memoire allouée au tableau tab_recette*/
+void free_tab_recette(tab_recette_ingredients_t *tab_recette){
+
+    for (int i = 0; i < tab_recette -> nb_recette; i++){
+        free_tab_ingredient(tab_recette -> recette_ingredients[i]);
+    }
+
+    free(tab_recette -> recette_ingredients);
+    free(tab_recette);
+}
+
+
+/*ajoute une entrée dans le tableau*/
+void add_tab_recette(tab_recette_ingredients_t *tab_recette, tab_ingredients_t *tab_ingredient){
+
+    if (tab_recette -> nb_recette == tab_recette -> taille_tab){        //Si il n'y a plus de place dans le tableau, on double la taille de celui-ci
+
+        tab_ingredients_t *tab_ingredient = malloc(sizeof(tab_ingredients_t) * (tab_recette -> taille_tab) * 2);
+
+        if (tab_ingredient == NULL){
+            exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < tab_recette -> nb_recette; i++){        //copie l'ancien tableau dans le nouveau
+            tab_ingredient[i] = tab_recette -> recette_ingredients[i + 1];
+        }
+
+        tab_recette -> taille_tab *= 2;
+
+        free(tab_recette -> recette_ingredients);       //On libere la mémoire alloué à l'ancien tableau
+        tab_recette -> recette_ingredients = tab_ingredient;     
+    }
+
+    tab_recette -> recette_ingredients[tab_recette -> nb_recette] = tab_ingredient;
+    tab_recette -> nb_recette += 1;
+}
+
+
+/*supprime une entrée du tableau et avance les éléments suivants*/
+int remove_tab_recette(tab_recette_ingredients_t *tab_recette, int indice){
+
+    if (indice >= tab_string -> nb_recette){
+        printf("Impossible de supprimer la recette, l'indeice est trop grand");
+        return -1;
+    }
+
+    free(tab_recette -> recette_ingredients[indice]);
+
+    for (int i = 0; i < tab_recette -> nb_recette - 1; i++){
+        tab_recette -> recette_ingredients[i] = tab_recette -> recette_ingredients[i + 1];
+    }
+
+    tab_recette -> nb_recette -= 1;
     return 0;
 }
