@@ -275,7 +275,7 @@ tab_ingredients_t *init_tab_ingredient(int size_array){
         exit(EXIT_FAILURE);
     }
 
-    ingredient_quantite_t *tab_ingredient_quantite = malloc(sizeof(ingredient_quantite_t) * (size_array + 5))
+    ingredient_quantite_t *tab_ingredient_quantite = malloc(sizeof(ingredient_quantite_t) * (size_array + 5))   //on ajoute quelques emplacemnet libre en plus si jamais on souhaite faire de petits ajouts
 
     if (tab_ingredient_quantite == NULL){
         exit(EXIT_FAILURE);
@@ -286,4 +286,60 @@ tab_ingredients_t *init_tab_ingredient(int size_array){
     tab_ingredient -> tab_ingredient_quantite = tab_ingredient_quantite;
 
     return tab_ingredient;
+}
+
+/*libere la memoire allouée au tableau tab_ingredient*/
+tab_ingredients_t *free_tab_ingredient(tab_ingredients_t *tab_ingredient){
+    
+    for (int i = 0; i < tab_ingredient -> nb_ingredient; i++){
+        tab_ingredient -> tab_ingredient_quantite[i];
+    }
+
+    free(tab_ingredient -> tab_ingredient_quantite);
+    free(tab_ingredient);
+}
+
+/*ajoute une entrée dans dans le tableau tab_ingredient*/
+void add_tab_ingredient(tab_ingredients_t *tab_ingredient, int id_ingredient, int quantity){
+
+    if(tab_ingredient -> nb_ingredient == tab_ingredient -> taille_tab){    //Si il n'y a plus de place dans le tableau, on double la taille de celui-ci
+
+        ingredient_quantite_t *tab_ingredient_quantite = malloc(sizeof(ingredient_quantite_t) * (tab_ingredient -> taille_tab) * 2);
+
+        if (tab_ingredient_quantite == NULL){
+            exit(EXIT_FAILURE);
+        }
+
+        for (int i = 0; i < tab_ingredient -> nb_ingredient; i++){      //copie l'ancien tableau dans le nouveau
+            tab_ingredient_quantite[i] = tab_ingredient -> tab_ingredient_quantite[i];
+        }
+
+        tab_ingredient -> taille_tab *= 2;
+
+        free(tab_ingredient -> tab_ingredient_quantite);        //On libere la mémoir alloué à l'ancien tableau
+        tab_ingredient -> tab_ingredient_quantite = tab_ingredient_quantite;
+    }
+
+    tab_ingredient -> tab_ingredient_quantite[tab_ingredient -> nb_ingredient] = init_ingredient_quantity(id_ingredient, quantity);
+    tab_ingredient -> nb_ingredient += 1;
+}
+
+
+/*supprime une entrée du tableau et avance les élément suivants*/
+int remove_tab_ingredient(tab_ingredients_t *tab_ingredient, int indice){
+
+    if (indice >= tab_ingredient -> nb_ingredient){     //On verifie que l'element que l'on souhaite supprimer existe (pourras etre enlever plus tard / fais pour du debug principalement au cas où)
+        printf("Impossible de supprimer le couple id_ingredient quantite, indice trop grand.\n");
+        return -1;
+    }
+
+    free(tab_ingredient -> tab_ingredient_quantite[indice]);
+
+    for (int i = indice; i < tab_ingredient -> nb_ingredient - 1; i++){     //Comme on suprime un element du tableau, on dessend les élément qui le suivent d'un cran
+        tab_ingredient -> tab_ingredient_quantite[i] = tab_ingredient -> tab_ingredient_quantite[i + 1];
+    }
+
+    tab_ingredient -> nb_ingredient -= 1;
+
+    return 0;
 }
