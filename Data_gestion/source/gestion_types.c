@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include </home/quentin/Documents/EI3A/Projet/gestion_recette/rep_git/Data_gestion/source/struct.h>//à changer pour l'avoir dans le makefile et chemin relatif
+#include "struct.h"
 
 //#define DEBUG
 //#include <assert.h> /* Pour debug */
