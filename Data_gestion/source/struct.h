@@ -19,7 +19,7 @@ typedef struct ingredient_nom_unite_{
 }ingredient_nom_unite_t;
 
 typedef struct tab_ingredient_nom_unite_{
-    ingredient_nom_unite_t *tab_ingredient_unite;
+    ingredient_nom_unite_t **tab_ingredient_unite;
     int nb_ingredient;
     int taille_tab;
 }tab_ingredient_nom_unite_t;
@@ -41,7 +41,7 @@ typedef struct ingredient_quantite_{
 typedef struct tab_ingredients_{
     int nb_ingredient;
     int taille_tab;
-    ingredient_quantite_t *tab_ingredient_quantite;
+    ingredient_quantite_t **tab_ingredient_quantite;
 }tab_ingredients_t;
 
 
@@ -49,7 +49,7 @@ typedef struct tab_ingredients_{
 
 /*Structure pour tableau dynamique de recette_ingredients*/
 typedef struct tab_recette_ingredients_{
-    tab_ingredients_t *recette_ingredients;
+    tab_ingredients_t **recette_ingredients;
     int taille_tab;
     int nb_recette;
 }tab_recette_ingredients_t;
