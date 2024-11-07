@@ -700,7 +700,6 @@ int main(void){
 
     free_tab_recette(tab_recette);
 
-
     /*fin test tableau rectte ingredient*/
 
     #endif
