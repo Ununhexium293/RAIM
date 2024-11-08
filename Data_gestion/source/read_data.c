@@ -5,7 +5,7 @@
 
 #define MAX_LEN_STRING 32
 
-#define DEBUG_read_data
+//#define DEBUG_read_data
 
 
 //_____________________________________LES PATHS SONT ECRIT DEPUIS RIM_____________________________________
