@@ -1,3 +1,4 @@
+elem = 3;
 ing=1 qt=500;
 ing=2 qt=300;
 ing=3 qt=4

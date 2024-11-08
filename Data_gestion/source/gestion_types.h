@@ -14,7 +14,7 @@ void free_tab_string(tab_string_t *tab_string);
 void add_tab_string(tab_string_t *tab_string, char *string_e);
 
 /*Retire le string à l'emplacement indice du tableau tab_string et avance d'un indice tous les elements suivant du tableau, renvoit -1 si l'indice est trop grand, 0 sinon*/
-int remove_tab_string(tab_string_t *tab_string, int indice)
+int remove_tab_string(tab_string_t *tab_string, int indice);
 
 
 /*________________tableau dynamique couple nom - unite________________*/
@@ -29,7 +29,7 @@ void free_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_no
 void add_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite, char *string, char unit);
 
 /*Retire le couple nom - unite à l'emplacement indice du tableau tab_ingredient_nom_unite et avance d'un indice tous les elements suivant du tableau, renvoit -1 si l'indice est trop grand, 0 sinon*/
-int remove_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite, int indice)
+int remove_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_nom_unite, int indice);
 
 
 /*________________tableau dynamique couple nom - quantite________________*/
@@ -60,26 +60,5 @@ void add_tab_recette(tab_recette_ingredients_t *tab_recette, tab_ingredients_t *
 
 /*Retire le tableau d'ingredient à l'emplacement indice du tableau tab_recette et avance d'un indice tous les elements suivant du tableau, renvoit -1 si l'indice est trop grand, 0 sinon*/
 int remove_tab_recette(tab_recette_ingredients_t *tab_recette, int indice);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "struct.h"
 
-//#define DEBUG
+//#define DEBUG_gestion_types
 //#include <assert.h> /* Pour debug */
 
 
@@ -446,11 +446,11 @@ int remove_tab_recette(tab_recette_ingredients_t *tab_recette, int indice){
 
 
 
-
+#ifdef DEBUG_gestion_types
 
 int main(void){
 
-    #ifdef DEBUG
+    
 
     /*test tableau de string*/
 
@@ -702,7 +702,9 @@ int main(void){
 
     /*fin test tableau rectte ingredient*/
 
-    #endif
+    
 
     return 0;
 }
+
+#endif

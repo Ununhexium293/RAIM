@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "struct.h"
+#include "gestion_types.c"
 
 
 /*On remplace les donnée du txt database.txt par celles du tableau dynamique associé*/
