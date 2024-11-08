@@ -52,37 +52,46 @@ tab_recette_ingredients_t *read_database(void){
 
 
 /*Charge les données du fichier recette.txt dans un tableau contenu dans la struct tab_recette_ingredients*/
-//void read_recette(tab_string_t * ListeNom){
-//    FILE * f = fopen("./Data_gestion/Data/recette.txt","r");
-//    if(f==NULL){
-//        fclose(f);
-//        printf("[ERROR] file not found\n");
-//        return;
-//    }
-//
-//
-//
-//
-//
-//
-//
-//    int i = 0;
-//
-//    /*Desolé du while 1 mais je peux pas faire autrement vu que jveux pas fscanf(f,";\n") a chaque tour de boucle faut que je m'arrete
-//    en plein milieu*/
-//    while(1){
-//        fscanf(f,"nom '%s'",&ListeNom->tb_string[i]);
-//        i++;
-//        if(feof(f)==0){
-//            break;
-//        }
-//        fscanf(f,";\n");
-//    }
-//
-//    fclose(f);
-//    return;    
-//}
-//
+tab_string_t *read_recette(void){
+    FILE * f = fopen("./Data_gestion/Data/recette.txt","r");
+    if(f==NULL){
+        fclose(f);
+        printf("[ERROR] file not found\n");
+        return;
+    }
+
+    int size_array;
+    fscanf(file,"elem = %d;\n",&size_array);
+
+    tab_string_t *tab_nom = init_tab_string(size_array);
+
+    for (int i = 0; i < size_array; i++){
+        char *temp;
+
+        fscanf("nom '%s'")
+    }
+
+
+
+
+
+    int i = 0;
+
+    /*Desolé du while 1 mais je peux pas faire autrement vu que jveux pas fscanf(f,";\n") a chaque tour de boucle faut que je m'arrete
+    en plein milieu*/
+    while(1){
+        fscanf(f,"nom '%s'",&ListeNom->tb_string[i]);
+        i++;
+        if(feof(f)==0){
+            break;
+        }
+        fscanf(f,";\n");
+    }
+
+    fclose(f);
+    return;    
+}
+
 ///*Charge les données du fichier inventaire.txt dans un tableau contenu dans la struct tab_inventaire*/
 //void read_inventaire(tab_ingredients_t * Inventaire){
 //    FILE * f = fopen("./Data_gestion/Data/inventaire.txt","r");

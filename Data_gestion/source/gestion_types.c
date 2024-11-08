@@ -294,7 +294,7 @@ tab_ingredients_t *init_tab_ingredient(int size_array){
 }
 
 /*libere la memoire allouée au tableau tab_ingredient*/
-tab_ingredients_t *free_tab_ingredient(tab_ingredients_t *tab_ingredient){
+void free_tab_ingredient(tab_ingredients_t *tab_ingredient){
     
     for (int i = 0; i < tab_ingredient -> nb_ingredient; i++){
         free(tab_ingredient -> tab_ingredient_quantite[i]);
@@ -303,8 +303,6 @@ tab_ingredients_t *free_tab_ingredient(tab_ingredients_t *tab_ingredient){
 
     free(tab_ingredient -> tab_ingredient_quantite);
     free(tab_ingredient);
-
-    return 0;
 }
 
 /*ajoute une entrée dans dans le tableau tab_ingredient*/

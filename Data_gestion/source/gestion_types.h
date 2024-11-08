@@ -38,7 +38,7 @@ int remove_tab_ingredient_nom_unite(tab_ingredient_nom_unite_t *tab_ingredient_n
 tab_ingredients_t *init_tab_ingredient(int size_array);
 
 /*Libere l'espace alloué au tableau dynamique de couple nom - quantite tab_ingredient*/
-tab_ingredients_t *free_tab_ingredient(tab_ingredients_t *tab_ingredient);
+void free_tab_ingredient(tab_ingredients_t *tab_ingredient);
 
 /*Ajoute le couple (id_ingredient, unit) au tableau tab_ingredient, s'il n'y a pas de place, double la taille du tableau avant d'ajouter le couple, et incremente la variable tab_ingredient -> nb_ingredient*/
 void add_tab_ingredient(tab_ingredients_t *tab_ingredient, int id_ingredient, int quantity);

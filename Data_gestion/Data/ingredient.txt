@@ -1,4 +1,4 @@
 elem = 3;
 qt=g nom='Farine';
 qt=g nom='Beurre';
-qt=n nom='Oeufs'
+qt=n nom='Oeufs';
