@@ -12,4 +12,7 @@ void write_recette(tab_string_t *ListeNom);
 /*Modifie le fichier inventaire.txt pour correspondre au tableau Inventaire et libere le tableau Inventaire*/
 void write_inventaire(tab_ingredients_t * Inventaire);
 
+/*Ajoute un ingredient au fichier ingredient.txt*/
+void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient);
+
 #endif
