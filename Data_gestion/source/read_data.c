@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
-#include "gestion_types.h"
+#include "../header/struct.h"
+#include "../header/gestion_types.h"
 
 #define MAX_LEN_STRING 32
 

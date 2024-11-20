@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
-#include "gestion_types.h"
+#include "../header/struct.h"
+#include "../header/gestion_types.h"
 
-//#define DEBUG_WRITE_DATA
-//#include "read_data.h"
+#define DEBUG_WRITE_DATA
+#include "../header/read_data.h"
 
 
 /*On remplace les donnée du txt database.txt par celles du tableau dynamique associé*/

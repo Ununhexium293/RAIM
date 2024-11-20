@@ -1,5 +1,5 @@
-#ifndef GESTION_TYPE_H
-#define GESTION_TYPE_H
+#ifndef READ_DATA_TYPE_H
+#define READ_DATA_TYPE_H
 
 tab_recette_ingredients_t *read_database(void);
 

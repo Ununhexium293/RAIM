@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "struct.h"
+#include "../header/struct.h"
 
 //#define DEBUG_gestion_types
 //#include <assert.h> /* Pour debug */
