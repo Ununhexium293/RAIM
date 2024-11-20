@@ -76,18 +76,14 @@ void write_inventaire(tab_ingredients_t * Inventaire){
     free_tab_ingredient(Inventaire);
 }
 
-//Il faudrait voir si c'est pas possible de juste avoir un tableau pour les nouveau ingredients
-///*On rajoute une ligne a ingredient.txt vu qu'aucune modification n'est autorisée pour pas casser tout les id 🤓*/
-//void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient){
-//    FILE * f = fopen("./Data_gestion/Data/ingredient.txt","a");
-//    
-//    fprintf(f, "qt=%c nom= %s;\n", NouvelIngredient -> unite, NouvelIngredient -> nom);
-//    
-//    fclose(f);
-//
-//    /*pas la bonne fonction*/
-//    /*free_tab_ingredient_nom_unite(NouvelIngredient);*/
-//}
+/*On rajoute une ligne a ingredient.txt vu qu'aucune modification n'est autorisée pour pas casser tout les id 🤓*/
+void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient){
+    FILE * f = fopen("./Data_gestion/Data/ingredient.txt","a");
+    
+    fprintf(f, "qt=%c nom= %s;\n", NouvelIngredient -> unite, NouvelIngredient -> nom);
+    
+    fclose(f);
+}
 
 
 #ifdef DEBUG_WRITE_DATA
