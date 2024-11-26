@@ -30,7 +30,7 @@
 
 
 
-## chargemnet des datas
+## chargement des datas
 
   au lancement - charger recette(noms) et inventaire
 
