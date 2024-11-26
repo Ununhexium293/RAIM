@@ -45,7 +45,11 @@ void write_recette(tab_string_t *ListeNom){
     fprintf(f, "elem = %d;\n", n);
 
     for(int i = 0; i<n; i++){
-        fprintf(f,"nom %s\n", ListeNom -> tb_string[i]);
+        for(int j = 0;ListeNom -> tb_string[i][j] != '\0';j++){
+            /*Je fprintf jusqu'a '\0' au lieu de fprintf un %s entier car il y aura beaucoup de caca dans les string si on les passe de maj accenté a min*/
+            fprintf(f,"%c",ListeNom -> tb_string[i][j]);
+        }
+        fprintf(f,"\n");
     }    
 
     fclose(f);
