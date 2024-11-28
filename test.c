@@ -95,7 +95,7 @@ int main() {
     i=0;
     printf("\n%s\n",changement);
     strlower(changement);
-    while(changement[i]!='_'){
+    while(changement[i]!=0){
         printf("%c",changement[i]);
         i++;
     }
