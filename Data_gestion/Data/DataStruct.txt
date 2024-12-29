@@ -1,29 +1,45 @@
 -----COMMENT LIRE LES DONNÉES DU TXT-----
 
+----------------------------------------------------------------------------------------------------------------------------------
+
 La table qui joint les id de recette et id d'ingredient avec quantité est de la forme :
 
-id={ID_RECETTE} / ing=[({ID_INGREDIENT},{QUANTITE})];
+ing= nb {NOMBRE D'INGREDIENTS} : [({ID D'INGREDIENT}:{QUANTITE}),];
 
-si on est sur la derniere ligne on remplace le ";" par absolument rien pour pouvoir rajouter des ligne sans tout reecrire
-le nombre de couple ({ID_INGREDIENT},{QUANTITE}) peut aller jusqu'a 64 et doivent etre séparé par des virgules tel sous la forme :
+l'id de la recette est egal a {numero de ligne}-1 (le premier id est 1)
 
-[({ID_INGREDIENT1},{QUANTITE1}),({ID_INGREDIENT2},{QUANTITE2}),({ID_INGREDIENT3},{QUANTITE3})]
+les couples ({ID_INGREDIENT},{QUANTITE}) doivent etre séparé par des virgules tel sous la forme :
+
+[({ID_INGREDIENT1}:{QUANTITE1}),({ID_INGREDIENT2}:{QUANTITE2}),({ID_INGREDIENT3}:{QUANTITE3}),]
+
+la premiere ligne du fichier est de la forme :
+
+elem = {NOMBRE TOTAL RECETTE};
+
+ce qui permet d'allouer la bonne taille de memoire pour un tableau qui contiendra toute les données nécessaires
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
 La table qui joint les id d'ingredient, les unité et les nom est de la forme :
 
-id={ID_INGREDIENT} qt={UNITE_INGREDIENT} nom="{NOM}";
+qt={UNITÉ} nom= {NOM INGREDIENT}
 
-si on est sur la derniere ligne on remplace le ";" par autre chose peu importe tant que c'est un char en utf-8
+le fonctionnement des id et de la premiere ligne est similaire au premier txt
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
 La table qui joint tout les id de recette a leur nom est de la forme :
 
-id={ID_RECETTE} / "{NOM_RECETTE}";
+nom {NOM RECETTE}
 
-si on est sur la derniere ligne on remplace le ";" par autre chose peu importe tant que c'est un char en utf-8
+le fonctionnement des id et de la premiere ligne est similaire au premier txt
 
+----------------------------------------------------------------------------------------------------------------------------------
 
+La table qui contient l'inventaire actuel est de la forme:
 
+ing={ID INGREDIENT} qt={QUANTITE};
+
+avec le fonctionnement de la premiere ligne qui est similaire au premier txt
+
+----------------------------------------------------------------------------------------------------------------------------------
