@@ -22,6 +22,29 @@ static int log_10(int n){
     return count;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab_t *passage_tab){
     /*setup box holder*/
 
