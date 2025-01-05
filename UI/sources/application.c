@@ -1,33 +1,13 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "page_recette.c"
+#include "../header/struct_passage.h"
+#include "../header/struct_passage_gestion.h"
+#include "../header/pages.h"
 
 /*à mettre dans un nouveau fichier*/
 
-typedef struct passage_changement_page_{
-    GtkStack *stack;
-    GtkWidget *page;
-} passage_changement_page;
 
-passage_changement_page *init_changement_page(GtkWidget *stack, GtkWidget *page){
-
-    passage_changement_page *changement = malloc(sizeof(passage_changement_page));
-
-    if (changement == NULL){
-        exit(EXIT_FAILURE);
-    }
-
-    changement -> stack = GTK_STACK(stack);
-    changement -> page = page;
-
-    return changement;
-}
-
-typedef struct passage_tab_{
-    tab_string_t *liste_recette;
-    
-}
 
 /*_______________________________________________________*/
 
@@ -40,6 +20,8 @@ static void page_show(GtkWidget *widget, gpointer data){
 
 
 static void activate(GtkApplication *app, gpointer user_data){
+
+    passage_tab_t *passage_tab = user_data;
 
     /*setup main window*/
     
@@ -80,11 +62,13 @@ static void activate(GtkApplication *app, gpointer user_data){
     gtk_widget_set_hexpand(stack, 1);
 
     /*pages à ajouter*/
-    GtkWidget *page_recette_1 = page_recette();
+    GtkWidget *page_recette_1 = page_recette(passage_tab);
     gtk_stack_add_child(GTK_STACK(stack), page_recette_1);
 
-    GtkWidget *page_recette_2 = page_recette();
+    GtkWidget *page_recette_2 = page_recette(passage_tab);
     gtk_stack_add_child(GTK_STACK(stack), page_recette_2);
+
+    /*___*/
 
     gtk_box_append(GTK_BOX(box), stack);
 
@@ -150,9 +134,11 @@ static void activate(GtkApplication *app, gpointer user_data){
 
 int main(int argc, char **argv){
 
+    passage_tab_t *passage_tab = init_passage_tab();
+
     GtkApplication *app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
 
-    g_signal_connect(app, "activate", G_CALLBACK(activate), NULL);
+    g_signal_connect(app, "activate", G_CALLBACK(activate), passage_tab);
 
     int status = g_application_run(G_APPLICATION(app), argc, argv);
 
