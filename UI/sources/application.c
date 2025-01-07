@@ -19,6 +19,9 @@ static void page_show(GtkWidget *widget, gpointer data){
 }
 
 
+
+
+
 static void activate(GtkApplication *app, gpointer user_data){
 
     passage_tab_t *passage_tab = user_data;
@@ -62,11 +65,9 @@ static void activate(GtkApplication *app, gpointer user_data){
     gtk_widget_set_hexpand(stack, 1);
 
     /*pages à ajouter*/
-    GtkWidget *page_recette_1 = page_recette(passage_tab);
-    gtk_stack_add_child(GTK_STACK(stack), page_recette_1);
+    GtkWidget *page_recette_1 = page_recette(stack, passage_tab);
 
-    GtkWidget *page_recette_2 = page_recette(passage_tab);
-    gtk_stack_add_child(GTK_STACK(stack), page_recette_2);
+    GtkWidget *page_recette_2 = page_recette(stack, passage_tab);
 
     /*___*/
 
@@ -102,9 +103,17 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     GtkWidget *bouton1 = gtk_button_new_with_label("Recettes");
 
+    /*permet de changer de page*/
+
     passage_changement_page *passe_page_1 = init_changement_page(stack, page_recette_1);
 
     g_signal_connect(bouton1, "clicked", G_CALLBACK(page_show), passe_page_1);
+
+    /*permet de mettre à jour la page*/
+
+    update_page_t *update_page_recette1 = init_update_page(passage_tab, page_recette_1);
+
+    g_signal_connect(bouton1, "clicked", G_CALLBACK(update_visual_recette), update_page_recette1);
 
     gtk_widget_set_halign(bouton1, GTK_ALIGN_START);
 
@@ -114,9 +123,17 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     GtkWidget *bouton2 = gtk_button_new_with_label("page_2");
 
+    /*permet de changer de page*/
+
     passage_changement_page *passe_page_2 = init_changement_page(stack, page_recette_2);
 
     g_signal_connect(bouton2, "clicked", G_CALLBACK(page_show), passe_page_2);
+
+    /*permet de mettre à jour la page*/
+
+    update_page_t *update_page_recette2 = init_update_page(passage_tab, page_recette_2);
+
+    g_signal_connect(bouton2, "clicked", G_CALLBACK(update_visual_recette), update_page_recette2);
 
     gtk_widget_set_halign(bouton2, GTK_ALIGN_START);
 

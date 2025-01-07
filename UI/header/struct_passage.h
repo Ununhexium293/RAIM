@@ -15,4 +15,9 @@ typedef struct passage_changement_page_{
     GtkWidget *page;
 } passage_changement_page;
 
+typedef struct update_page_{
+    passage_tab_t *passage_tab;
+    GtkWidget *page;
+}update_page_t;
+
 #endif

@@ -32,3 +32,17 @@ passage_tab_t *init_passage_tab(void){
 
     return passage_tab;
 }
+
+update_page_t *init_update_page(passage_tab_t *passage_tab, GtkWidget *page){
+    
+    update_page_t *update_page_recette = malloc(sizeof(update_page_t));
+
+    if (update_page_recette == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    update_page_recette -> passage_tab = passage_tab;
+    update_page_recette -> page = page; 
+
+    return update_page_recette;
+}
