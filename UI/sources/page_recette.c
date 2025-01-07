@@ -68,7 +68,7 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
     free(num);
 
-    //gtk_widget_set_visible(label_num, 0);
+    gtk_widget_set_visible(label_num, 0);
 
     gtk_flow_box_append(GTK_FLOW_BOX(box_holder), label_num);
 
@@ -91,17 +91,9 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
 
 
-printf("%d : ok\n", id_recette);
-    fflush(stdout);
 
 
     /*setup label nom*/
-
-    printf("%s\n", passage_tab -> liste_recette -> tb_string[id_recette]);
-    fflush(stdout);
-
-    printf("%d : ok\n", id_recette);
-    fflush(stdout);
 
     GtkWidget *label_nom = gtk_label_new(passage_tab -> liste_recette -> tb_string[id_recette]);
 
@@ -111,8 +103,6 @@ printf("%d : ok\n", id_recette);
 
     gtk_box_append(GTK_BOX(box_container), label_nom);
 
-printf("%d : ok\n", id_recette);
-    fflush(stdout);
 
 
 
@@ -180,11 +170,7 @@ printf("%d : ok\n", id_recette);
 
 void update_visual_recette(GtkWidget *widget, gpointer data){
 
-    printf("ok\n");
-    fflush(stdout);
     update_page_t *update_page_recette = data;
-
-    //GtkWidget *temp = gtk_stack_get_visible_child(GTK_STACK(widget));
 
     GtkWidget *temp = update_page_recette -> page;
 
