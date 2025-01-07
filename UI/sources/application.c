@@ -100,7 +100,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     /*page_1*/
 
-    GtkWidget *bouton1 = gtk_button_new_with_label("page_1");
+    GtkWidget *bouton1 = gtk_button_new_with_label("Recettes");
 
     passage_changement_page *passe_page_1 = init_changement_page(stack, page_recette_1);
 
