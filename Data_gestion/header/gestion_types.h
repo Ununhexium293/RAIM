@@ -61,4 +61,19 @@ void add_tab_recette(tab_recette_ingredients_t *tab_recette, tab_ingredients_t *
 /*Retire le tableau d'ingredient à l'emplacement indice du tableau tab_recette et avance d'un indice tous les elements suivant du tableau, renvoit -1 si l'indice est trop grand, 0 sinon*/
 int remove_tab_recette(tab_recette_ingredients_t *tab_recette, int indice);
 
+
+/*________________tab dynamique int________________*/
+
+/*Crée un tableau dynamique de string de taille size_tab + 5 sur le tas et renvoit le pointeur vers celui-ci*/
+tab_int_t *init_tab_int(int size_tab);
+
+/*Libere l'espace alloué au tableau dynamique de string tab_string*/
+void free_tab_int(tab_int_t *tab_int);
+
+/*Ajoute le string string_e au tableau tab_string, s'il n'y a pas de place, double la taille du tableau avant d'ajouter le string, et incremente la variable tab_string -> nb_string*/
+void add_tab_int(tab_int_t *tab_int, int int_e);
+
+/*Retire le string à l'emplacement indice du tableau tab_string et avance d'un indice tous les elements suivant du tableau, renvoit -1 si l'indice est trop grand, 0 sinon*/
+int remove_tab_int(tab_int_t *tab_int, int indice);
+
 #endif

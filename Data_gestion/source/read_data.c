@@ -130,6 +130,37 @@ tab_ingredient_nom_unite_t *read_ingredient(void){
     return tab_ingr;
 }
 
+tab_int_t * read_menu(void){
+
+    FILE * f = fopen("./Data_gestion/Data/menu.txt","r");
+
+    if(f==NULL){
+        fclose(f);
+        printf("[ERROR] file not found\n");
+        exit(EXIT_FAILURE);
+    }
+
+    int nb,add;
+    fscanf(f,"elem = %d;",&nb);
+
+
+    tab_int_t * ListeAttente;
+    ListeAttente = init_tab_int(nb);
+
+    for(int i = 0;i<nb;i++){
+
+        fscanf(f,"\n%d;",&add);
+        add_tab_int(ListeAttente,add);
+
+
+    }
+
+
+
+    fclose(f);
+
+    return ListeAttente;
+}
 
 
 #ifdef DEBUG_read_data
@@ -198,6 +229,22 @@ int main(void){
     free_tab_ingredient_nom_unite(tab_ingr_nom_unite);
 
     /*Fin debug read ingredients*/
+
+    /*Debug read_menu*/
+
+    printf("\n\nDebug read_menu\n");
+
+
+    tab_int_t *tab_id = read_menu();
+
+    for (int i = 0; i < tab_id -> nb_int; i++){
+        printf("id recette : %d\n", tab_id -> tb_int[i]);
+    }
+
+    free_tab_int(tab_id);
+
+    /*Fin debug read_menu*/
+
 
     return 0;
 }

@@ -3,8 +3,8 @@
 #include "../header/struct.h"
 #include "../header/gestion_types.h"
 
-//#define DEBUG_WRITE_DATA
-//#include "../header/read_data.h"
+#define DEBUG_WRITE_DATA
+#include "../header/read_data.h"
 
 
 /*On remplace les donnée du txt database.txt par celles du tableau dynamique associé*/
@@ -45,11 +45,7 @@ void write_recette(tab_string_t *ListeNom){
     fprintf(f, "elem = %d;\n", n);
 
     for(int i = 0; i<n; i++){
-        for(int j = 0;ListeNom -> tb_string[i][j] != '\0';j++){
-            /*Je fprintf jusqu'a '\0' au lieu de fprintf un %s entier car il y aura beaucoup de caca dans les string si on les passe de maj accenté a min*/
-            fprintf(f,"%c",ListeNom -> tb_string[i][j]);
-        }
-        fprintf(f,"\n");
+        fprintf(f,"nom %s\n",ListeNom -> tb_string[i]);
     }    
 
     fclose(f);
@@ -90,6 +86,23 @@ void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient){
 }
 
 
+void write_menu(tab_int_t * ListeAttente){
+    FILE * f = fopen("./Data_gestion/Data/menu.txt","w");
+
+    fprintf(f,"elem = %d;",ListeAttente -> nb_int);
+
+    for(int i = 0; i<ListeAttente -> nb_int; i++){
+        fprintf(f,"\n%d;", ListeAttente -> tb_int[i]);
+    }
+
+    fclose(f);
+
+    free_tab_int(ListeAttente);
+
+    return;
+}
+
+
 #ifdef DEBUG_WRITE_DATA
 
 int main(void){
@@ -110,7 +123,13 @@ int main(void){
 
     write_inventaire(read_inventaire());
 
-    /*Fin debug write inventaire*/
+    /*Fin debug write_inventaire*/
+
+    /*Debug write_menu*/
+
+    write_menu(read_menu());
+
+    /*Fin debug write_menu*/
 
 
 

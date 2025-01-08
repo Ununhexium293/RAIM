@@ -9,4 +9,6 @@ tab_ingredients_t *read_inventaire(void);
 
 tab_ingredient_nom_unite_t *read_ingredient(void);
 
+tab_int_t * read_menu(void);
+
 #endif
