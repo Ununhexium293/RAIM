@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "../header/struct.h"
 
-//#define DEBUG_gestion_types
-//#include <assert.h> /* Pour debug */
+#define DEBUG_gestion_types
+#include <assert.h> /* Pour debug */
 
 
 /*_______________________________gestion tableau dynamique___________________________________________*/
@@ -443,6 +443,88 @@ int remove_tab_recette(tab_recette_ingredients_t *tab_recette, int indice){
 
 
 
+/*initialise un tableau dynamique de int*/
+tab_int_t *init_tab_int(int size_tab){
+    tab_int_t *tab_int = malloc(sizeof(tab_int_t));
+    
+
+    if (tab_int == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    int *tb_int = (int*) malloc(sizeof(int) * (size_tab + 5)); //on ajoute quelques emplacemnet libre en plus si jamais on souhaite faire de petits ajouts
+
+    if (tb_int == NULL){
+        exit(EXIT_FAILURE);
+    }
+
+    tab_int -> tb_int = tb_int;
+    tab_int -> nb_int = 0;
+    tab_int -> taille_tab = size_tab + 5;
+
+    return tab_int;
+}
+
+
+/*libere la memoire allouée au tableau dynamique de int*/
+void free_tab_int(tab_int_t *tab_int){
+    free(tab_int -> tb_int);
+    free(tab_int);
+    return;
+}
+
+
+/*ajoute une entrée dans dans le tableau tab_int*/
+void add_tab_int(tab_int_t *tab_int, int int_e){
+
+    if (tab_int -> nb_int == tab_int -> taille_tab){     //Si il n'y a plus de place dans le tableau, on double la taille de celui-ci
+        
+        int *tb_int_sub = (int*) malloc(sizeof(int) * (tab_int -> taille_tab) * 2);
+
+        if (tb_int_sub == NULL){
+            exit(EXIT_FAILURE);
+        }
+        
+        for(int i = 0; i<tab_int -> taille_tab;i++){
+            tb_int_sub[i] = tab_int -> tb_int[i];
+        }//copie l'ancien tableau dans le nouveau
+        
+        tab_int -> taille_tab *= 2;
+
+        free(tab_int -> tb_int);      //On libere la mémoire alloué à l'ancien tableau
+        tab_int -> tb_int = tb_int_sub;
+    }
+
+
+
+    tab_int -> tb_int[tab_int -> nb_int] = int_e;
+    
+    tab_int -> nb_int += 1;
+
+
+    return;
+}
+
+
+/*supprime une entrée du tableau et avance les élément recule*/
+int remove_tab_int(tab_int_t *tab_int, int indice){
+
+    if (indice >= tab_int -> nb_int){       //On verifie que l'element que l'on souhaite supprimer existe (pourras etre enlever plus tard / fais pour du debug principalement au cas où)
+        printf("Impossible de supprimer le nombre, indice trop grand.\n");
+        return -1;
+    }
+
+
+    for (int i = indice; i < tab_int -> nb_int - 1; i++){     //Comme on suprime un element du tableau, on dessend les élément qui le suivent d'un cran
+        tab_int -> tb_int[i] = tab_int -> tb_int[i + 1];
+    }
+
+    tab_int -> nb_int -= 1;
+
+    return 0;
+}
+
+
 
 #ifdef DEBUG_gestion_types
 
@@ -700,7 +782,42 @@ int main(void){
 
     /*fin test tableau rectte ingredient*/
 
-    
+    /*test tableau de int*/
+
+    printf("\nDebug tableau int :\n");
+
+
+    tab_int_t *tab_int = init_tab_int(1);    
+
+    assert(tab_int -> taille_tab == 6);
+
+
+    for(int i = 0; i<10;i++){
+        add_tab_int(tab_int, i);
+    }
+
+    assert(tab_int -> nb_int == 10);
+
+    assert(tab_int -> taille_tab == 12);
+
+    printf("contenu case 5 : %d\n", tab_int -> tb_int[5]);
+
+    remove_tab_int(tab_int, 5);
+
+    printf("contenu case 5 : %d\n", tab_int -> tb_int[5]);
+    assert(tab_int -> nb_int == 9);
+
+    printf("contenu case 8 : %d\n", tab_int -> tb_int[8]);
+
+    remove_tab_int(tab_int, 8);
+
+    assert(tab_int -> nb_int == 8);
+
+    printf("contenu case 0 : %d\n", tab_int -> tb_int[0]);
+
+    free_tab_int(tab_int);
+
+    /*fin test tableau de int*/
 
     return 0;
 }

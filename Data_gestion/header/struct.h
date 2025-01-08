@@ -8,6 +8,12 @@ typedef struct tab_string_{
     int taille_tab;
 }tab_string_t;
 
+/*tableau dynamique de int*/
+typedef struct tab_int_{
+    int *tb_int;
+    int nb_int;
+    int taille_tab;
+}tab_int_t;
 
 //_____________________________COUPLE INGREDIENT NOM - UNITE _____________________________
 /*Structure liant le nom d'un ingredient a son unité de mesure*/
