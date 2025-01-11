@@ -3,8 +3,8 @@
 #include "../header/struct.h"
 #include "../header/gestion_types.h"
 
-#define DEBUG_WRITE_DATA
-#include "../header/read_data.h"
+//#define DEBUG_WRITE_DATA
+//#include "../header/read_data.h"
 
 
 /*On remplace les donnée du txt database.txt par celles du tableau dynamique associé*/

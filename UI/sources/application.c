@@ -5,6 +5,7 @@
 #include "../header/struct_passage_gestion.h"
 #include "../header/pages.h"
 
+
 /*à mettre dans un nouveau fichier*/
 
 
@@ -68,6 +69,8 @@ static void activate(GtkApplication *app, gpointer user_data){
     GtkWidget *page_recette_1 = page_recette(stack, passage_tab);
 
     GtkWidget *page_recette_2 = page_recette(stack, passage_tab);
+
+    GtkWidget *page_ingredient_3 = page_recette(stack, passage_tab);
 
     /*___*/
 
@@ -141,6 +144,26 @@ static void activate(GtkApplication *app, gpointer user_data){
 
 
 
+
+    /*page_3*/
+
+    GtkWidget *bouton3 = gtk_button_new_with_label("Ingredients");
+
+    /*permet de changer de page*/
+
+    passage_changement_page *passe_page_3 = init_changement_page(stack, page_ingredient_3);
+
+    g_signal_connect(bouton3, "clicked", G_CALLBACK(page_show), passe_page_3);
+
+    /*permet de mettre à jour la page*/
+
+    update_page_t *update_page_ingredient3 = init_update_page(passage_tab, page_ingredient_3);
+
+    g_signal_connect(bouton3, "clicked", G_CALLBACK(update_visual_ingredient), update_page_ingredient3);
+
+    gtk_widget_set_halign(bouton3, GTK_ALIGN_START);
+
+    gtk_box_append(GTK_BOX(side_box), bouton3);
 
 
 
