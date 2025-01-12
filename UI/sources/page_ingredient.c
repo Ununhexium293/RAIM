@@ -137,7 +137,16 @@ void update_visual_ingredient(GtkWidget *widget, gpointer data){
 
 
 
+void add_ingredient(GtkWidget *widget, GtkWidget *searchentry, GtkWidget * textbox, gpointer data){
+    passage_tab_t *passage_tab = data;
 
+    gchar* ing = gtk_editable_get_chars(GTK_EDITABLE(searchentry),0,32);
+    gchar* unite = gtk_editable_get_chars(GTK_EDITABLE(textbox),0,32);
+
+    add_tab_ingredient_nom_unite(passage_tab -> liste_ingredient, ing, unite[0]);
+
+    update_visual_ingredient(widget,passage_tab);
+}
 
 
 
@@ -208,7 +217,15 @@ GtkWidget *page_ingredient(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_box_append(GTK_BOX(box_on_top), searchentry);
 
 
+    //setup text unite
 
+    GtkWidget *textunite = gtk_entry_new();
+
+    gtk_widget_set_halign(textunite, GTK_ALIGN_END);
+
+    gtk_widget_set_size_request(textunite, 50, 50);
+    
+    gtk_box_append(GTK_BOX(box_on_top), textunite);
 
 
     /*setup add_button*/
@@ -220,6 +237,9 @@ GtkWidget *page_ingredient(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_widget_set_size_request(add_button, 200, 50);
     
     gtk_box_append(GTK_BOX(box_on_top), add_button);
+
+    g_signal_connect(add_button, "clicked", G_CALLBACK(add_ingredient), searchentry, textunite, passage_tab);
+
 
 
 
