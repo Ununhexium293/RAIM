@@ -1,5 +1,5 @@
 elem = 4;
-nom Pâte_brisée
+nom Pate_brisee
 nom test1
 nom test2
 nom test3
