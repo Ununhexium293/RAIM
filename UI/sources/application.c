@@ -70,7 +70,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     GtkWidget *page_recette_2 = page_recette(stack, passage_tab);
 
-    GtkWidget *page_ingredient_3 = page_recette(stack, passage_tab);
+    GtkWidget *page_ingredient_3 = page_ingredient(stack, passage_tab);
 
     /*___*/
 
