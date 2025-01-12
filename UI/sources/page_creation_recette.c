@@ -74,12 +74,6 @@ GtkWidget *page_creation_recette(GtkWidget *stack, GtkWidget *page, passage_tab_
     gtk_box_append(GTK_BOX(bar_on_bottom), cancel_button);
 
 
-
-
-
-    /**/
-
-
     gtk_stack_add_child(GTK_STACK(stack), box_holder);
 
     return box_holder;
