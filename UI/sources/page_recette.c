@@ -1,12 +1,13 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../header/pages.h"
 #include "../header/struct_passage.h"
+#include "../header/struct_passage_gestion.h"
 #include "../../Data_gestion/header/gestion_types.h"
 
 /*a faire*/
 /*fonction ajout recette*/
-/*fonction supprimer recette*/
 /*fonction ajouter recette*/
 
 static int log_10(int n){
@@ -23,7 +24,11 @@ static int log_10(int n){
 }
 
 
+static void create_recipe(GtkWidget *widget, gpointer data){
+    passage_changement_page *changement = data;
 
+    gtk_stack_set_visible_child(changement -> stack, changement -> page);
+}
 
 
 static void rm_recette(passage_tab_t *passage_tab, int id_recette){
@@ -297,6 +302,10 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_widget_set_size_request(add_button, 200, 50);
     
     gtk_box_append(GTK_BOX(box_on_top), add_button);
+
+    GtkWidget *page_sub = page_creation_recette(stack, flowbox1, passage_tab);
+
+    g_signal_connect(add_button, "clicked", G_CALLBACK(create_recipe), init_changement_page(stack, page_sub));
 
 
 
