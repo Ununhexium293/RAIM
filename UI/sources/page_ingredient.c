@@ -150,11 +150,15 @@ void add_ingredient(GtkWidget *widget,  gpointer data){
     //je rajoute le nouvel ing dans le tableau
     add_tab_ingredient_nom_unite(passage_tab -> liste_ingredient, ing, unite[0]);
 
+    //Je crée une case d'inventaire pour le nouvel ingredient
+    add_tab_ingredient(passage_tab -> liste_inventaire, passage_tab -> liste_ingredient  -> nb_ingredient -1, 0);
+
     //IL MANQUE LA MAJ VISUELLE
 
     //debug
     //printf("%c\n\n\n", passage_tab -> liste_ingredient -> tab_ingredient_unite[3] -> unite);
     //fflush(stdout);
+
 
 }
 
@@ -249,8 +253,7 @@ GtkWidget *page_ingredient(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_box_append(GTK_BOX(box_on_top), add_button);
 
     g_signal_connect(add_button, "clicked", G_CALLBACK(add_ingredient) ,passage_tab);
-
-
+    
 
 
 
