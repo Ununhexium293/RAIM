@@ -8,6 +8,7 @@ typedef struct passage_tab_{
     tab_ingredient_nom_unite_t *liste_ingredient;
     tab_ingredients_t *liste_inventaire;
     tab_recette_ingredients_t *liste_link;
+    tab_int_t *liste_menu;
 } passage_tab_t;
 
 typedef struct passage_changement_page_{
