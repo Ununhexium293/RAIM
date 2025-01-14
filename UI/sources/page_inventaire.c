@@ -213,19 +213,25 @@ static void button_add_qt_inventaire(GtkWidget *widget, gpointer data){
     /*get the id of the recipe*/ 
     int id_inventaire = atoi(gtk_label_get_text(GTK_LABEL(label)));
 
-    gchar* valeur = gtk_editable_get_chars(GTK_EDITABLE(GTK_ENTRY(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_container)))),0,32);
+    gchar* valeur = gtk_editable_get_chars(GTK_EDITABLE(GTK_ENTRY(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_container))))),0,32);
 
+    printf("%s",valeur);
+
+    
     printf("CACA\n\n\n");
     fflush(stdout);
 
     int quantite = atoi(valeur);
     
 
+
+
     //Je rajoute la valeur donnée negative ou positive en verifiant tout de meme si ils n'y a pas de dette
 
     if (passage_tab -> liste_inventaire -> tab_ingredient_quantite[id_inventaire] -> quantite < -quantite){
         return;
     }
+
 
     passage_tab -> liste_inventaire -> tab_ingredient_quantite[id_inventaire] -> quantite += quantite;
     /*update the visual*/
