@@ -7,8 +7,8 @@
 #include "../../Data_gestion/header/gestion_types.h"
 
 /*a faire*/
-/*fonction ajout recette*/
-/*fonction ajouter recette*/
+/*fonction ajout menu*/
+/*fonction ajouter menu*/
 
 static int log_10(int n){
     int count = 0;
@@ -24,32 +24,22 @@ static int log_10(int n){
 }
 
 
-static void create_recipe(GtkWidget *widget, gpointer data){
-    passage_changement_page *changement = data;
 
-    gtk_stack_set_visible_child(changement -> stack, changement -> page);
-}
-
-
-static void rm_recette(passage_tab_t *passage_tab, int id_recette){
-    remove_tab_string(passage_tab -> liste_recette, id_recette);
-    remove_tab_recette(passage_tab -> liste_link, id_recette);
+static void rm_menu(passage_tab_t *passage_tab, int id_menu){
+    remove_tab_int(passage_tab -> liste_menu, id_menu);
 }
 
 
 
 
 
-static void button_rm_recette(GtkWidget *widget, gpointer data);
-
-static void button_add_recette_menu(GtkWidget *widget, gpointer data);
+static void button_rm_menu(GtkWidget *widget, gpointer data);
 
 
 
 
 
-
-static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab_t *passage_tab){
+static void init_affiche_menu(GtkWidget *flowbox, int id_menu, passage_tab_t *passage_tab){
     /*setup box holder*/
 
     GtkWidget *box_holder = gtk_flow_box_new();
@@ -68,9 +58,9 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
     /*setup label num*/
 
-    char *num = malloc(sizeof(char) * (log_10(id_recette) + 1));
+    char *num = malloc(sizeof(char) * (log_10(id_menu) + 1));
 
-    sprintf(num, "%d", id_recette);
+    sprintf(num, "%d", id_menu);
 
     GtkWidget *label_num = gtk_label_new(num);
 
@@ -79,10 +69,6 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
     gtk_widget_set_visible(label_num, 0);
 
     gtk_flow_box_append(GTK_FLOW_BOX(box_holder), label_num);
-
-
-
-
 
 
 
@@ -103,7 +89,7 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
     /*setup label nom*/
 
-    GtkWidget *label_nom = gtk_label_new(passage_tab -> liste_recette -> tb_string[id_recette]);
+    GtkWidget *label_nom = gtk_label_new(passage_tab -> liste_recette -> tb_string[passage_tab -> liste_menu -> tb_int[id_menu]]);
 
     gtk_widget_set_valign(label_nom, GTK_ALIGN_CENTER);
 
@@ -127,22 +113,6 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
 
 
-
-    /*setup bouton ajout*/
-
-    GtkWidget *boutton_ajout = gtk_button_new_with_label("ajouter");
-    
-    gtk_widget_set_valign(label_nom, GTK_ALIGN_CENTER);
-
-    gtk_widget_set_halign(label_nom, GTK_ALIGN_END);
-
-    gtk_box_append(GTK_BOX(box_container), boutton_ajout);
-
-    g_signal_connect(boutton_ajout, "clicked", G_CALLBACK(button_add_recette_menu), passage_tab);
-
-
-
-
     /*setup bouton supprimer*/
 
     GtkWidget *boutton_supprimer = gtk_button_new_with_label("supprimer");
@@ -153,7 +123,7 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
     gtk_box_append(GTK_BOX(box_container), boutton_supprimer);
 
-    g_signal_connect(boutton_supprimer, "clicked", G_CALLBACK(button_rm_recette), passage_tab);
+    g_signal_connect(boutton_supprimer, "clicked", G_CALLBACK(button_rm_menu), passage_tab);
 
 
 
@@ -177,25 +147,28 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
 
 
 
-void update_visual_recette(GtkWidget *widget, gpointer data){
+void update_visual_menu(GtkWidget *widget, gpointer data){
 
-    update_page_t *update_page_recette = data;
+    update_page_t *update_page_menu = data;
 
-    GtkWidget *temp = update_page_recette -> page;
+    GtkWidget *temp = update_page_menu -> page;
 
     GtkWidget *scroll_window = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(temp),2));
     GtkWidget *flowbox = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(scroll_window))));
 
     gtk_flow_box_remove_all(GTK_FLOW_BOX(flowbox));
 
-    for (int i = 0; i < update_page_recette -> passage_tab -> liste_recette -> nb_string; i++){
-        init_affiche_recette(flowbox, i, update_page_recette -> passage_tab);
+    for (int i = 0; i < update_page_menu -> passage_tab -> liste_menu -> nb_int; i++){
+        init_affiche_menu(flowbox, i, update_page_menu -> passage_tab);
     }
 
 } 
 
 
-static void button_add_recette_menu(GtkWidget *widget, gpointer data){
+
+
+
+static void button_rm_menu(GtkWidget *widget, gpointer data){
 
     passage_tab_t *passage_tab = data;
 
@@ -204,35 +177,18 @@ static void button_add_recette_menu(GtkWidget *widget, gpointer data){
     GtkWidget *label = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(box_holder), 0));
     
     /*get the id of the recipe*/ 
-    int id_recette = atoi(gtk_label_get_text(GTK_LABEL(label)));
-
-    add_tab_int(passage_tab -> liste_menu, id_recette);
-
-
-    return;
-}
-
-static void button_rm_recette(GtkWidget *widget, gpointer data){
-
-    passage_tab_t *passage_tab = data;
-
-    GtkWidget *box_container = gtk_widget_get_parent(widget);
-    GtkWidget *box_holder = gtk_widget_get_parent(gtk_widget_get_parent(box_container));
-    GtkWidget *label = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(box_holder), 0));
-    
-    /*get the id of the recipe*/ 
-    int id_recette = atoi(gtk_label_get_text(GTK_LABEL(label)));
+    int id_menu = atoi(gtk_label_get_text(GTK_LABEL(label)));
 
     /*remove the recipe from data*/
-    rm_recette(passage_tab, id_recette);
+    rm_menu(passage_tab, id_menu);
 
     /*update the visual*/
     GtkWidget *flowbox_scrolled_window = gtk_widget_get_parent(gtk_widget_get_parent(box_holder));
 
     gtk_flow_box_remove_all(GTK_FLOW_BOX(flowbox_scrolled_window));
 
-    for (int i = 0; i < passage_tab -> liste_recette -> nb_string; i++){
-        init_affiche_recette(flowbox_scrolled_window, i, passage_tab);
+    for (int i = 0; i < passage_tab -> liste_menu -> nb_int; i++){
+        init_affiche_menu(flowbox_scrolled_window, i, passage_tab);
     }
 
 }
@@ -258,7 +214,7 @@ static void button_rm_recette(GtkWidget *widget, gpointer data){
 
 
 
-GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
+GtkWidget *page_menu(GtkWidget *stack, passage_tab_t *passage_tab){
 
     
     
@@ -293,7 +249,6 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
 
 
-
     /*setup searchentry*/
 
     GtkWidget *searchentry = gtk_search_entry_new();
@@ -311,19 +266,7 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
 
 
-    /*setup add_button*/
-
-    GtkWidget *add_button = gtk_button_new_with_label("nouvelle recette");
-
-    gtk_widget_set_halign(add_button, GTK_ALIGN_END);
-
-    gtk_widget_set_size_request(add_button, 200, 50);
     
-    gtk_box_append(GTK_BOX(box_on_top), add_button);
-
-    GtkWidget *page_sub = page_creation_recette(stack, flowbox1, passage_tab);
-
-    g_signal_connect(add_button, "clicked", G_CALLBACK(create_recipe), init_changement_page(stack, page_sub));
 
 
 
@@ -354,6 +297,7 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
 
 
+
     /*setup child_flow_box*/
 
     GtkWidget *flowbox2 = gtk_flow_box_new();
@@ -370,10 +314,13 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
     gtk_stack_add_child(GTK_STACK(stack), flowbox1);
 
-    /*ajout des recettes enregistre*/
+    /*ajout des menus enregistre*/
 
-    for (int i = 0; i < passage_tab -> liste_recette -> nb_string; i++){
-        init_affiche_recette(flowbox2, i, passage_tab);
+
+
+
+    for (int i = 0; i < passage_tab -> liste_menu -> nb_int; i++){
+        init_affiche_menu(flowbox2, i, passage_tab);
     }
 
     return flowbox1;

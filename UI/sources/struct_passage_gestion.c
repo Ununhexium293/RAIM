@@ -29,6 +29,7 @@ passage_tab_t *init_passage_tab(void){
     passage_tab -> liste_inventaire = read_inventaire();
     passage_tab -> liste_link = read_database();
     passage_tab -> liste_recette = read_recette();
+    passage_tab -> liste_menu = read_menu();
 
     return passage_tab;
 }

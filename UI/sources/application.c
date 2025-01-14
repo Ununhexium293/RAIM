@@ -74,6 +74,8 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     GtkWidget *page_inventaire_4 = page_inventaire(stack, passage_tab);
 
+    GtkWidget *page_menu_5 = page_menu(stack, passage_tab);
+
     /*___*/
 
     gtk_box_append(GTK_BOX(box), stack);
@@ -189,6 +191,28 @@ static void activate(GtkApplication *app, gpointer user_data){
     gtk_widget_set_halign(bouton4, GTK_ALIGN_START);
 
     gtk_box_append(GTK_BOX(side_box), bouton4);
+
+
+
+    //page 5
+
+    GtkWidget *bouton5 = gtk_button_new_with_label("Menu");
+
+    //Permet de changer de page
+
+    passage_changement_page *passe_page_5 = init_changement_page(stack, page_menu_5);
+
+    g_signal_connect(bouton5, "clicked", G_CALLBACK(page_show), passe_page_5);
+
+    //permet de mettre a jour la page
+
+    update_page_t *update_page_menu5 = init_update_page(passage_tab, page_menu_5);
+
+    g_signal_connect(bouton5, "clicked", G_CALLBACK(update_visual_menu), update_page_menu5);
+
+    gtk_widget_set_halign(bouton5, GTK_ALIGN_START);
+
+    gtk_box_append(GTK_BOX(side_box), bouton5);
 
 
     
