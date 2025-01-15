@@ -181,6 +181,8 @@ static void button_rm_menu(GtkWidget *widget, gpointer data){
 
     /*remove the recipe from data*/
     rm_menu(passage_tab, id_menu);
+    update_tab_inv(passage_tab,passage_tab  -> liste_link -> recette_ingredients[id_menu],1);
+
 
     /*update the visual*/
     GtkWidget *flowbox_scrolled_window = gtk_widget_get_parent(gtk_widget_get_parent(box_holder));

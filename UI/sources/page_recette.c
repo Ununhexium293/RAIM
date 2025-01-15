@@ -206,8 +206,11 @@ static void button_add_recette_menu(GtkWidget *widget, gpointer data){
     /*get the id of the recipe*/ 
     int id_recette = atoi(gtk_label_get_text(GTK_LABEL(label)));
 
-    add_tab_int(passage_tab -> liste_menu, id_recette);
+    if (update_tab_inv(passage_tab,passage_tab  -> liste_link -> recette_ingredients[id_recette],-1) == -1){
+        return;
+    }
 
+    add_tab_int(passage_tab -> liste_menu, id_recette);
 
     return;
 }
@@ -239,7 +242,34 @@ static void button_rm_recette(GtkWidget *widget, gpointer data){
 
 
 
+int update_tab_inv(passage_tab_t *passage_tab, tab_ingredients_t* Recette, int mode){
+    //Mode add = 1
+    //Mode del = -1
+    int i ,indice,qt_inv,qt_recette;
+    if(mode == -1){
+        for(i = 0;i<Recette->nb_ingredient;i++){
+            indice = Recette -> tab_ingredient_quantite[i] -> id_ingredient -1 ;
+            qt_recette = Recette -> tab_ingredient_quantite[i] -> quantite;
+            qt_inv = passage_tab -> liste_inventaire -> tab_ingredient_quantite[indice] -> quantite;
+            if(qt_inv < qt_recette){
+                return -1;
+            }
+        }
 
+        for(i = 0;i<Recette->nb_ingredient;i++){
+            indice = Recette -> tab_ingredient_quantite[i] -> id_ingredient -1;
+            passage_tab -> liste_inventaire -> tab_ingredient_quantite[indice] -> quantite -= Recette -> tab_ingredient_quantite[i] -> quantite;
+        }
+    }else{
+        for(i = 0;i<Recette->nb_ingredient;i++){
+            indice = Recette -> tab_ingredient_quantite[i] -> id_ingredient -1;
+            passage_tab -> liste_inventaire -> tab_ingredient_quantite[indice] -> quantite += Recette -> tab_ingredient_quantite[i] -> quantite;
+        }
+        
+    }
+
+    return 1;
+}
 
 
 
