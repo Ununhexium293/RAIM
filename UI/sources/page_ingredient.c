@@ -138,14 +138,21 @@ void update_visual_ingredient(GtkWidget *widget, gpointer data){
 
 
 void add_ingredient(GtkWidget *widget,  gpointer data){
+
+    
     passage_tab_t *passage_tab = data;
 
     //on recup le widget parent commun aux 2 text box
     GtkWidget *box_on_top = gtk_widget_get_parent(widget);
     
     //je recup le content des 2 text box
-    gchar* ing = gtk_editable_get_chars(GTK_EDITABLE(GTK_ENTRY(gtk_widget_get_first_child(box_on_top))),0,32);
-    gchar* unite = gtk_editable_get_chars(GTK_EDITABLE(GTK_ENTRY(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_on_top)))),0,32);
+    gchar* ing = gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_first_child(box_on_top)),0,32);
+    gchar* unite = gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_on_top))),0,32);
+
+
+    //je vide la zone de texte
+    gtk_editable_delete_text(GTK_EDITABLE(gtk_widget_get_first_child(box_on_top)),0,32);
+    gtk_editable_delete_text(GTK_EDITABLE(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_on_top))),0,32);
 
     //je rajoute le nouvel ing dans le tableau
     add_tab_ingredient_nom_unite(passage_tab -> liste_ingredient, ing, unite[0]);
@@ -159,6 +166,15 @@ void add_ingredient(GtkWidget *widget,  gpointer data){
     //printf("%c\n\n\n", passage_tab -> liste_ingredient -> tab_ingredient_unite[3] -> unite);
     //fflush(stdout);
 
+    /*GtkWidget* scroll_window = gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(box_on_top));
+    GtkWidget* flowbox = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(scroll_window))));
+
+
+    gtk_flow_box_remove_all(GTK_FLOW_BOX(flowbox));
+
+    for (int i = 0; i < passage_tab -> liste_ingredient -> nb_ingredient; i++){
+        init_affiche_ingredient(flowbox, i, passage_tab);
+    }*/
 
 }
 
