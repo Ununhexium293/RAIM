@@ -164,7 +164,7 @@ static void init_affiche_recette(GtkWidget *flowbox, int id_recette, passage_tab
     GtkWidget *separator = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
 
     gtk_flow_box_append(GTK_FLOW_BOX(box_holder), separator);
-    
+
 
 
 
@@ -296,6 +296,7 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
     GtkWidget *flowbox1 = gtk_flow_box_new();
 
+
     gtk_widget_set_valign(flowbox1, GTK_ALIGN_START);
     gtk_widget_set_vexpand(flowbox1, 1);
 
@@ -304,8 +305,9 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
     
     gtk_flow_box_set_max_children_per_line(GTK_FLOW_BOX(flowbox1), 1);
     gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(flowbox1), GTK_SELECTION_NONE);
-
     
+    gtk_stack_add_child(GTK_STACK(stack), flowbox1);
+
 
 
 
@@ -398,7 +400,6 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrollwindow), flowbox2);
 
-    gtk_stack_add_child(GTK_STACK(stack), flowbox1);
 
     /*ajout des recettes enregistre*/
 
