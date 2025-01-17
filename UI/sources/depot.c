@@ -53,3 +53,6 @@ int compare_str(char * str1, char * str2){
     }
     return -1;
 }
+
+
+https://www.swisstransfer.com/d/d29c91ac-0af4-4065-97f7-4521bb3cef96
