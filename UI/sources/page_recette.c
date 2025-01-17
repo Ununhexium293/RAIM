@@ -5,23 +5,13 @@
 #include "../header/struct_passage.h"
 #include "../header/struct_passage_gestion.h"
 #include "../../Data_gestion/header/gestion_types.h"
+#include "../header/utilities.h"
 
 /*a faire*/
 /*fonction ajout recette*/
 /*fonction ajouter recette*/
 
-static int log_10(int n){
-    int count = 0;
 
-    while (n != 0){
-        n /= 10;
-        count++;
-    }
-
-    count--;
-
-    return count;
-}
 
 
 static void create_recipe(GtkWidget *widget, gpointer data){
@@ -280,7 +270,13 @@ int update_tab_inv(passage_tab_t *passage_tab, tab_ingredients_t* Recette, int m
 /*________________________________________________________________________________*/
 
 
-
+//static void filtre(GtkWidget *widget, gpointer data){
+//
+//    GtkWidget *flowbox1 = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(widget))));
+//    GtkWidget *flowbox2 = gtk_viewport_get_child(GTK_VIEWPORT())
+//
+//
+//}
 
 
 
@@ -339,6 +335,8 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_search_entry_set_search_delay(GTK_SEARCH_ENTRY(searchentry), 125);
 
     gtk_box_append(GTK_BOX(box_on_top), searchentry);
+
+    //g_signal_connect(searchentry, "search-changed", G_CALLBACK(filter), void);
 
 
 

@@ -4,6 +4,7 @@
 #include "../header/struct_passage.h"
 #include "../header/struct_passage_gestion.h"
 #include "../header/pages.h"
+#include "../../Data_gestion/header/write_data.h"
 
 
 /*à mettre dans un nouveau fichier*/
@@ -19,7 +20,14 @@ static void page_show(GtkWidget *widget, gpointer data){
     gtk_stack_set_visible_child(changement -> stack, changement -> page);
 }
 
+static void ferme(GtkWidget *widget, gpointer data){
+    passage_tab_t *passage_tab = data;
 
+    write_database(passage_tab -> liste_link);
+    write_recette(passage_tab -> liste_recette);
+    write_inventaire(passage_tab -> liste_inventaire);
+    write_menu(passage_tab -> liste_menu);
+}
 
 
 
@@ -215,6 +223,11 @@ static void activate(GtkApplication *app, gpointer user_data){
     gtk_box_append(GTK_BOX(side_box), bouton5);
 
 
+
+
+
+
+    g_signal_connect(main_window, "close-request", G_CALLBACK(ferme), passage_tab);
     
     gtk_window_present (GTK_WINDOW (main_window));
 }
