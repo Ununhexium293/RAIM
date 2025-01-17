@@ -1,4 +1,5 @@
-elem = 3;
+elem = 4;
 qt=g nom= Farine
 qt=g nom= Beurre
 qt=n nom= Oeufs
+qt=g nom= test

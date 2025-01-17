@@ -80,7 +80,7 @@ void write_inventaire(tab_ingredients_t * Inventaire){
 void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient){
     FILE * f = fopen("./Data_gestion/Data/ingredient.txt","a");
     
-    fprintf(f, "qt=%c nom= %s;\n", NouvelIngredient -> unite, NouvelIngredient -> nom);
+    fprintf(f, "qt=%c nom= %s\n", NouvelIngredient -> unite, NouvelIngredient -> nom);
     
     fclose(f);
 }
