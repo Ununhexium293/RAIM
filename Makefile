@@ -1,4 +1,4 @@
-SRC= Data_gestion/source/gestion_types.c Data_gestion/source/read_data.c Data_gestion/source/write_data.c UI/sources/page_recette.c UI/sources/struct_passage_gestion.c UI/sources/page_creation_recette.c UI/sources/page_ingredient.c UI/sources/application.c UI/sources/page_inventaire.c UI/sources/page_menu.c
+SRC= Data_gestion/source/gestion_types.c Data_gestion/source/read_data.c Data_gestion/source/write_data.c UI/sources/page_recette.c UI/sources/struct_passage_gestion.c UI/sources/page_creation_recette.c UI/sources/page_ingredient.c UI/sources/application.c UI/sources/page_inventaire.c UI/sources/page_menu.c UI/sources/utilities.c
 
 OBJ= $(SRC:.c=.o)
 

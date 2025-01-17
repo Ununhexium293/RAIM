@@ -184,6 +184,7 @@ void update_visual_recette(GtkWidget *widget, gpointer data){
     GtkWidget *temp = update_page_recette -> page;
 
     GtkWidget *scroll_window = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(temp),2));
+    
     GtkWidget *flowbox = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(scroll_window))));
 
     gtk_flow_box_remove_all(GTK_FLOW_BOX(flowbox));
@@ -373,9 +374,9 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
     GtkWidget *scrollwindow = gtk_scrolled_window_new();
 
-    gtk_widget_set_halign(searchentry, GTK_ALIGN_FILL);
+    gtk_widget_set_halign(scrollwindow, GTK_ALIGN_FILL);
 
-    gtk_widget_set_valign(searchentry, GTK_ALIGN_FILL);
+    gtk_widget_set_valign(scrollwindow, GTK_ALIGN_FILL);
     gtk_widget_set_vexpand(scrollwindow, 1);
 
     gtk_scrolled_window_set_propagate_natural_height(GTK_SCROLLED_WINDOW(scrollwindow), 1);
