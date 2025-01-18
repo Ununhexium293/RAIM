@@ -158,7 +158,6 @@ void add_ingredient(GtkWidget *widget,  gpointer data){
     //je rajoute le nouvel ing dans le tableau
     add_tab_ingredient_nom_unite(passage_tab -> liste_ingredient, ing, unite[0]);
 
-    ajout_ingredient(passage_tab -> liste_ingredient -> tab_ingredient_unite[passage_tab -> liste_ingredient -> nb_ingredient - 1]);
 
     //Je crée une case d'inventaire pour le nouvel ingredient
     add_tab_ingredient(passage_tab -> liste_inventaire, passage_tab -> liste_ingredient  -> nb_ingredient -1, 0);

@@ -77,11 +77,23 @@ void write_inventaire(tab_ingredients_t * Inventaire){
 }
 
 /*On rajoute une ligne a ingredient.txt vu qu'aucune modification n'est autorisée pour pas casser tout les id 🤓*/
-void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient){
-    FILE * f = fopen("./Data_gestion/Data/ingredient.txt","a");
+
+void ajout_ingredient(tab_ingredient_nom_unite_t * NouvelIngredient){
+    FILE * f = fopen("./Data_gestion/Data/temp_ingredient.txt","w");
+
+    int n = NouvelIngredient -> nb_ingredient;
+    fprintf(f, "elem = %d;\n", n);
+
+    for (int i = 0; i < n; i++){
+        fprintf(f, "qt=%c ",  NouvelIngredient -> tab_ingredient_unite[i] -> unite);
+        fprintf(f, "nom= %s\n", NouvelIngredient -> tab_ingredient_unite[i] -> nom);
+    }
     
-    fprintf(f, "qt=%c nom= %s\n", NouvelIngredient -> unite, NouvelIngredient -> nom);
+    //fprintf(f, "qt=%c nom= %s\n", NouvelIngredient -> unite, NouvelIngredient -> nom);
     
+    remove("./Data_gestion/Data/ingredient.txt");
+    rename("./Data_gestion/Data/temp_ingredient.txt","./Data_gestion/Data/ingredient.txt");
+
     fclose(f);
 }
 

@@ -13,7 +13,7 @@ void write_recette(tab_string_t *ListeNom);
 void write_inventaire(tab_ingredients_t * Inventaire);
 
 /*Ajoute un ingredient au fichier ingredient.txt*/
-void ajout_ingredient(ingredient_nom_unite_t * NouvelIngredient);
+void ajout_ingredient(tab_ingredient_nom_unite_t * NouvelIngredient);
 
 void write_menu(tab_int_t * ListeAttente);
 
