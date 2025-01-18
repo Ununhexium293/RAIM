@@ -131,7 +131,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     g_signal_connect(bouton1, "clicked", G_CALLBACK(update_visual_recette), update_page_recette1);
 
-    gtk_widget_set_halign(bouton1, GTK_ALIGN_START);
+    gtk_widget_set_halign(bouton1, GTK_ALIGN_FILL);
 
     gtk_box_append(GTK_BOX(side_box), bouton1);
 
@@ -151,7 +151,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     g_signal_connect(bouton2, "clicked", G_CALLBACK(update_visual_recette), update_page_recette2);
 
-    gtk_widget_set_halign(bouton2, GTK_ALIGN_START);
+    gtk_widget_set_halign(bouton2, GTK_ALIGN_FILL);
 
     gtk_box_append(GTK_BOX(side_box), bouton2);
 
@@ -174,7 +174,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     g_signal_connect(bouton3, "clicked", G_CALLBACK(update_visual_ingredient), update_page_ingredient3);
 
-    gtk_widget_set_halign(bouton3, GTK_ALIGN_START);
+    gtk_widget_set_halign(bouton3, GTK_ALIGN_FILL);
 
     gtk_box_append(GTK_BOX(side_box), bouton3);
 
@@ -197,7 +197,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     g_signal_connect(bouton4, "clicked", G_CALLBACK(update_visual_inventaire), update_page_inventaire4);
 
-    gtk_widget_set_halign(bouton4, GTK_ALIGN_START);
+    gtk_widget_set_halign(bouton4, GTK_ALIGN_FILL);
 
     gtk_box_append(GTK_BOX(side_box), bouton4);
 
@@ -219,7 +219,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     g_signal_connect(bouton5, "clicked", G_CALLBACK(update_visual_menu), update_page_menu5);
 
-    gtk_widget_set_halign(bouton5, GTK_ALIGN_START);
+    gtk_widget_set_halign(bouton5, GTK_ALIGN_FILL);
 
     gtk_box_append(GTK_BOX(side_box), bouton5);
 
