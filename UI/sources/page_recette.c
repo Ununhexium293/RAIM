@@ -24,6 +24,12 @@ static void create_recipe(GtkWidget *widget, gpointer data){
 static void rm_recette(passage_tab_t *passage_tab, int id_recette){
     remove_tab_string(passage_tab -> liste_recette, id_recette);
     remove_tab_recette(passage_tab -> liste_link, id_recette);
+
+    for (int i = 0; i < passage_tab -> liste_menu -> nb_int; i++){
+        if (passage_tab -> liste_menu -> tb_int[i] == id_recette){
+            remove_tab_int(passage_tab -> liste_menu, i);
+        }
+    }
 }
 
 
@@ -232,7 +238,7 @@ static void button_rm_recette(GtkWidget *widget, gpointer data){
 }
 
 
-
+/*cause probleme*/
 int update_tab_inv(passage_tab_t *passage_tab, tab_ingredients_t* Recette, int mode){
     //Mode add = 1
     //Mode del = -1
