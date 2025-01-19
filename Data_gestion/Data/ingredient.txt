@@ -1,4 +1,4 @@
 elem = 3;
-qt=g nom= Farine
-qt=g nom= Beurre
-qt=n nom= Oeufs
+qt=g nom= farine
+qt=g nom= beurre
+qt=n nom= oeufs

@@ -466,6 +466,37 @@ static void rigth_part_component(GtkWidget *sub_box_holder, passage_tab_t *passa
 
 
 
+/*fonction searchbar*/
+static int filter(GtkFlowBoxChild *child, gpointer data){
+    char *str = data;
+
+    GtkWidget *box_holder = gtk_flow_box_child_get_child(child);
+    GtkWidget *label = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(box_holder), 1));
+
+    const char *text = gtk_label_get_text(GTK_LABEL(label));
+
+    return filter_str(str, text);
+}
+
+static void search_filtre(GtkWidget *widget, gpointer data){
+
+    GtkWidget *flowbox1 = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(widget)));
+    GtkWidget *flowbox2 = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox1), 2))))));
+
+    char *str = gtk_editable_get_chars(GTK_EDITABLE(widget), 0, 32);
+
+    strlower(str);
+
+    gtk_flow_box_set_filter_func(GTK_FLOW_BOX(flowbox2), filter, str, lib_str);
+
+}
+
+
+
+
+
+
+
 GtkWidget *set_rigth_part(GtkWidget *sub_box_holder, passage_tab_t *passage_tab){
 
     /*setup main container*/
@@ -499,6 +530,7 @@ GtkWidget *set_rigth_part(GtkWidget *sub_box_holder, passage_tab_t *passage_tab)
 
     gtk_flow_box_append(GTK_FLOW_BOX(container), box_on_top);
 
+
     /*setup text entry*/
 
     GtkWidget *searchbar = gtk_search_entry_new();
@@ -509,6 +541,8 @@ GtkWidget *set_rigth_part(GtkWidget *sub_box_holder, passage_tab_t *passage_tab)
     gtk_widget_set_hexpand(searchbar, 1);
 
     gtk_box_append(GTK_BOX(box_on_top), searchbar);
+
+    g_signal_connect(searchbar, "search-changed", G_CALLBACK(search_filtre), NULL);
 
     /*end setup searchbar*/
 
