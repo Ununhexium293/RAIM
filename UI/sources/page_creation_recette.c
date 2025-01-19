@@ -13,6 +13,13 @@
 /*fonction setup partie gauche*/
 
 /*a faire : - bouton rm*/
+static void button_rm_ingr(GtkWidget *boutton, gpointer data){
+    GtkWidget *box_container = gtk_widget_get_parent(boutton);
+    GtkWidget *box_holder = gtk_widget_get_parent(gtk_widget_get_parent(box_container));
+    GtkWidget *flowbox = gtk_widget_get_parent(gtk_widget_get_parent(box_holder));
+
+    gtk_flow_box_remove(GTK_FLOW_BOX(flowbox), box_holder);
+}
 
 //wstatic void button_rm_ingr();
 
@@ -115,7 +122,6 @@ static void left_part_component(GtkWidget *sub_box_holder, passage_tab_t *passag
 
 
     /*setup label unite*/
-    /*test necessaire*/
     GtkWidget *label_unite = gtk_label_new(&(passage_tab -> liste_ingredient -> tab_ingredient_unite[id_ingr] -> unite));
 
     gtk_widget_set_valign(label_unite, GTK_ALIGN_CENTER);
@@ -153,7 +159,7 @@ static void left_part_component(GtkWidget *sub_box_holder, passage_tab_t *passag
 
     gtk_box_append(GTK_BOX(box_container), boutton_supprimer);
 
-    //g_signal_connect(boutton_supprimer, "clicked", G_CALLBACK(button_rm_ingr), passage_tab);
+    g_signal_connect(boutton_supprimer, "clicked", G_CALLBACK(button_rm_ingr), NULL);
 
 
 
