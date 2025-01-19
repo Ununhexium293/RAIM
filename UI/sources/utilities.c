@@ -17,6 +17,12 @@ int log_10(int n){
     return count;
 }
 
+void lib_str(gpointer data){
+    char *str = data;
+
+    free(str);
+}
+
 
 void strlower(char * str){
     int nb_lettre =0;
@@ -86,7 +92,7 @@ void strlower(char * str){
     return;
 }
 
-int filter_str(char * str1, char * str2){
+int filter_str(char * str1, const char * str2){
     int len1 = 0;
     int len2 = 0;
 
@@ -94,26 +100,31 @@ int filter_str(char * str1, char * str2){
     while(str1[len1] != '\0'){
         len1++;
     }
-    while(str2[len2] != '\0'){
-        len2++;
-    }
 
-    printf("%d:%d\n",len1,len2);
-    printf("%c%c%c",str1[0],str1[1],str1[2]);
-    if(len1>len2){
-        return 0;
-    }
+    if (len1 == 0){
+        return 1;
+    }else{
+        while(str2[len2] != '\0'){
+            len2++;
+        }
 
-    /*FENETRE GLISSANTE O(n*m)*/
-    int i,j;
-    for(i = 0;i<len2-len1+1;i++){
-        for(j = 0; j<len1 ; j++){
-            printf("val : %c:%c\n",str1[j],str2[j+i]);
-            if(str1[j]!=str2[j+i]){
-                break;
-            }
-            if(j == len1-1){
-                return 1;
+        printf("%d:%d\n",len1,len2);
+        printf("%c%c%c",str1[0],str1[1],str1[2]);
+        if(len1>len2){
+            return 0;
+        }
+
+        /*FENETRE GLISSANTE O(n*m)*/
+        int i,j;
+        for(i = 0;i<len2-len1+1;i++){
+            for(j = 0; j<len1 ; j++){
+                printf("val : %c:%c\n",str1[j],str2[j+i]);
+                if(str1[j]!=str2[j+i]){
+                    break;
+                }
+                if(j == len1-1){
+                    return 1;
+                }
             }
         }
     }

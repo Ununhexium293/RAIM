@@ -7,12 +7,6 @@
 #include "../../Data_gestion/header/gestion_types.h"
 #include "../header/utilities.h"
 
-/*a faire*/
-/*fonction ajout recette*/
-/*fonction ajouter recette*/
-
-
-
 
 static void create_recipe(GtkWidget *widget, gpointer data){
     passage_changement_page *changement = data;
@@ -275,14 +269,31 @@ int update_tab_inv(passage_tab_t *passage_tab, tab_ingredients_t* Recette, int m
 
 /*________________________________________________________________________________*/
 
+static int filter(GtkFlowBoxChild *child, gpointer data){
+    char *str = data;
 
-//static void filtre(GtkWidget *widget, gpointer data){
-//
-//    GtkWidget *flowbox1 = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(widget))));
-//    GtkWidget *flowbox2 = gtk_viewport_get_child(GTK_VIEWPORT())
-//
-//
-//}
+    GtkWidget *box_holder = gtk_flow_box_child_get_child(child);
+    GtkWidget *container = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(box_holder), 1));
+    GtkWidget *label = gtk_widget_get_first_child(container);
+
+    const char *text = gtk_label_get_text(GTK_LABEL(label));
+
+    return filter_str(str, text);
+}
+
+
+static void search_filtre(GtkWidget *widget, gpointer data){
+
+    GtkWidget *flowbox1 = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(widget)));
+    GtkWidget *flowbox2 = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox1), 2))))));
+
+    char *str = gtk_editable_get_chars(GTK_EDITABLE(widget), 0, 32);
+
+    strlower(str);
+
+    gtk_flow_box_set_filter_func(GTK_FLOW_BOX(flowbox2), filter, str, lib_str);
+
+}
 
 
 
@@ -342,7 +353,7 @@ GtkWidget *page_recette(GtkWidget *stack, passage_tab_t *passage_tab){
 
     gtk_box_append(GTK_BOX(box_on_top), searchentry);
 
-    //g_signal_connect(searchentry, "search-changed", G_CALLBACK(filter), void);
+    g_signal_connect(searchentry, "search-changed", G_CALLBACK(search_filtre), NULL);
 
 
 

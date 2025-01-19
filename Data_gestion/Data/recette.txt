@@ -1,2 +1,2 @@
 elem = 1;
-nom Pate_brisee
+nom pate_brisee
