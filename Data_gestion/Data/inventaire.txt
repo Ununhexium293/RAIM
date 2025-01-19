@@ -1,6 +1,6 @@
 elem = 5;
-ing=1 qt=300;
-ing=2 qt=300;
-ing=3 qt=4;
+ing=1 qt=670;
+ing=2 qt=500;
+ing=3 qt=6;
 ing=3 qt=0;
 ing=4 qt=0;

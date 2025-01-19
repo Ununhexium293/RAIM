@@ -1,3 +1,2 @@
-elem = 2;
+elem = 1;
 nom Pate_brisee
-nom test1

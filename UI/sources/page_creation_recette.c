@@ -6,6 +6,7 @@
 #include "../header/struct_passage_gestion.h"
 #include "../../Data_gestion/header/struct.h"
 #include "../../Data_gestion/header/gestion_types.h"
+#include "../header/pages.h"
 
 
 
@@ -21,7 +22,8 @@ static void button_rm_ingr(GtkWidget *boutton, gpointer data){
     gtk_flow_box_remove(GTK_FLOW_BOX(flowbox), box_holder);
 }
 
-//wstatic void button_rm_ingr();
+
+
 
 static void left_part_component(GtkWidget *sub_box_holder, passage_tab_t *passage_tab, int id_ingr, char *quantite){
 
@@ -573,9 +575,55 @@ static void cancel_button_function(GtkWidget *widget, gpointer data){
     gtk_stack_set_visible_child(changement -> stack, changement -> page);
 }
 
-//static void validate_button_function(GtkWidget *function, gpointer data){
-//    
-//}
+static void validate_button_function(GtkWidget *button, gpointer data){
+    validate_function_pass_t *passage = data;
+
+    GtkWidget *box_on_bottom = gtk_widget_get_parent(button);
+    GtkWidget *box_holder = gtk_widget_get_parent(box_on_bottom);
+    GtkWidget *sub_box_holder = gtk_widget_get_first_child(box_holder);
+
+    GtkWidget *container = gtk_paned_get_start_child(GTK_PANED(sub_box_holder));
+    GtkWidget *scrolled_window = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 2));
+    GtkWidget *flowbox1 = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(scrolled_window))));
+
+    tab_ingredients_t *link = init_tab_ingredient(1);
+
+    GtkWidget *flowbox_child_i = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_first_child(flowbox1)));
+
+    if (flowbox_child_i != NULL){
+        GtkWidget *flowbox_child_last = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_last_child(flowbox1)));
+
+        if (flowbox_child_i != flowbox_child_last){
+            int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
+            int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
+
+            add_tab_ingredient(link, id + 1, quantity);
+        }else{
+            while (flowbox_child_i != flowbox_child_last){
+                int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
+                int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
+
+                add_tab_ingredient(link, id, quantity);
+
+                flowbox_child_i = gtk_widget_get_next_sibling(flowbox_child_i);
+            }
+            int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
+            int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
+
+            add_tab_ingredient(link, id + 1, quantity);
+        }
+    }
+
+    add_tab_recette(passage -> passage_tab -> liste_link, link);
+
+    add_tab_string(passage -> passage_tab -> liste_recette, gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_last_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 0)))), 0, 32));
+
+    gtk_editable_delete_text(GTK_EDITABLE(gtk_widget_get_last_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 0)))), 0, -1);
+
+    gtk_flow_box_remove_all(GTK_FLOW_BOX(flowbox1));
+
+    gtk_stack_set_visible_child(passage -> changement -> stack, passage -> changement -> page);
+}
 
 
 
@@ -586,6 +634,7 @@ GtkWidget *page_creation_recette(GtkWidget *stack, GtkWidget *page, passage_tab_
     GtkWidget *box_holder = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 
     gtk_widget_set_valign(box_holder, GTK_ALIGN_FILL);
+    gtk_widget_set_vexpand(box_holder, 1);
 
     gtk_widget_set_halign(box_holder, GTK_ALIGN_FILL);
 
@@ -611,7 +660,7 @@ GtkWidget *page_creation_recette(GtkWidget *stack, GtkWidget *page, passage_tab_
     /*GtkWidget *left_part =*/ set_left_part(sub_box_holder);
 
     /*setup rigth part*/
-    /*test*/set_rigth_part(sub_box_holder, passage_tab);
+    set_rigth_part(sub_box_holder, passage_tab);
 
 
     /*setup holder_separator*/
@@ -651,7 +700,9 @@ GtkWidget *page_creation_recette(GtkWidget *stack, GtkWidget *page, passage_tab_
 
     passage -> changement = init_changement_page(stack, page);
 
-    //g_signal_connect(validate_button, "clicked", G_CALLBACK(validate_button_function), passage);
+    g_signal_connect(validate_button, "clicked", G_CALLBACK(validate_button_function), passage);
+
+    g_signal_connect(validate_button, "clicked", G_CALLBACK(update_visual_recette), init_update_page(passage_tab, page));
 
     gtk_box_append(GTK_BOX(bar_on_bottom), validate_button);
 
