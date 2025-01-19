@@ -573,6 +573,9 @@ static void cancel_button_function(GtkWidget *widget, gpointer data){
     gtk_stack_set_visible_child(changement -> stack, changement -> page);
 }
 
+//static void validate_button_function(GtkWidget *function, gpointer data){
+//    
+//}
 
 
 
@@ -635,6 +638,26 @@ GtkWidget *page_creation_recette(GtkWidget *stack, GtkWidget *page, passage_tab_
 
 
 
+    /*boutton confirmer*/
+    GtkWidget *validate_button = gtk_button_new_with_label("confirmer");
+
+    gtk_widget_set_valign(validate_button, GTK_ALIGN_CENTER);
+
+    gtk_widget_set_halign(validate_button, GTK_ALIGN_END);
+
+    validate_function_pass_t *passage = malloc(sizeof(validate_function_pass_t));
+
+    passage -> passage_tab = passage_tab;
+
+    passage -> changement = init_changement_page(stack, page);
+
+    //g_signal_connect(validate_button, "clicked", G_CALLBACK(validate_button_function), passage);
+
+    gtk_box_append(GTK_BOX(bar_on_bottom), validate_button);
+
+
+
+
     /*boutton cancel*/
     GtkWidget *cancel_button = gtk_button_new_with_label("cancel");
 
@@ -642,7 +665,7 @@ GtkWidget *page_creation_recette(GtkWidget *stack, GtkWidget *page, passage_tab_
 
     gtk_widget_set_halign(cancel_button, GTK_ALIGN_END);
 
-    g_signal_connect(cancel_button, "clicked", G_CALLBACK(cancel_button_function), init_changement_page(stack, page));
+    g_signal_connect(cancel_button, "clicked", G_CALLBACK(cancel_button_function), passage -> changement);
 
     gtk_box_append(GTK_BOX(bar_on_bottom), cancel_button);
 

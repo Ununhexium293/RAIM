@@ -21,4 +21,9 @@ typedef struct update_page_{
     GtkWidget *page;
 }update_page_t;
 
+typedef struct validate_function_pass_{
+    passage_tab_t *passage_tab;
+    passage_changement_page *changement;
+}validate_function_pass_t;
+
 #endif

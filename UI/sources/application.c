@@ -23,11 +23,17 @@ static void page_show(GtkWidget *widget, gpointer data){
 static void ferme(GtkWidget *widget, gpointer data){
     passage_tab_t *passage_tab = data;
 
+    
+
     write_database(passage_tab -> liste_link);
     write_recette(passage_tab -> liste_recette);
     write_inventaire(passage_tab -> liste_inventaire);
     ajout_ingredient(passage_tab -> liste_ingredient);
     write_menu(passage_tab -> liste_menu);
+
+    free(passage_tab);
+
+    gtk_window_close(GTK_WINDOW(widget));
 }
 
 

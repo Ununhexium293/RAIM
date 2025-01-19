@@ -28,7 +28,6 @@ void write_database(tab_recette_ingredients_t *ListeRec){
         }
         fprintf(f,"];\n");
     }
-
     fclose(f);
     
     remove("./Data_gestion/Data/database.txt");
