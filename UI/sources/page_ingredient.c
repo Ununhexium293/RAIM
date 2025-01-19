@@ -4,22 +4,7 @@
 #include "../header/struct_passage.h"
 #include "../../Data_gestion/header/gestion_types.h"
 #include "../../Data_gestion/header/write_data.h"
-
-//a faire
-//fonction ajout ingredient
-
-static int log_10(int n){
-    int count = 0;
-
-    while (n != 0){
-        n /= 10;
-        count++;
-    }
-
-    count--;
-
-    return count;
-}
+#include "../header/utilities.h"
 
 
 
@@ -148,6 +133,8 @@ void add_ingredient(GtkWidget *widget,  gpointer data){
     
     //je recup le content des 2 text box
     gchar* ing = gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_first_child(box_on_top)),0,32);
+    strlower(ing);
+
     gchar* unite = gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_on_top))),0,32);
 
 

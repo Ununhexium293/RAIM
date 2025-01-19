@@ -618,7 +618,10 @@ static void validate_button_function(GtkWidget *button, gpointer data){
 
     add_tab_recette(passage -> passage_tab -> liste_link, link);
 
-    add_tab_string(passage -> passage_tab -> liste_recette, gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_last_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 0)))), 0, 32));
+    char *nom_recette = gtk_editable_get_chars(GTK_EDITABLE(gtk_widget_get_last_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 0)))), 0, 32);
+    strlower(nom_recette);
+
+    add_tab_string(passage -> passage_tab -> liste_recette, nom_recette);
 
     gtk_editable_delete_text(GTK_EDITABLE(gtk_widget_get_last_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 0)))), 0, -1);
 
