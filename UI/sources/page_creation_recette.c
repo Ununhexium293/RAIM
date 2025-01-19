@@ -18,7 +18,7 @@
 
 static void left_part_component(GtkWidget *sub_box_holder, passage_tab_t *passage_tab, int id_ingr, char *quantite){
 
-    GtkWidget *left_part = gtk_paned_get_start_child(GTK_PANED(sub_box_holder));;
+    GtkWidget *left_part = gtk_paned_get_start_child(GTK_PANED(sub_box_holder));
     GtkWidget *scrolled_window = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(left_part), 2));
     GtkWidget *flowbox = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(scrolled_window))));
 
@@ -84,6 +84,19 @@ static void left_part_component(GtkWidget *sub_box_holder, passage_tab_t *passag
     gtk_widget_set_halign(label_nom, GTK_ALIGN_START);
 
     gtk_box_append(GTK_BOX(box_container), label_nom);
+
+
+
+
+
+    /*setup espacement*/
+    GtkWidget *espacement1 = gtk_label_new(" : ");
+
+    gtk_widget_set_valign(espacement1, GTK_ALIGN_CENTER);
+
+    gtk_widget_set_halign(espacement1, GTK_ALIGN_START);
+
+    gtk_box_append(GTK_BOX(box_container), espacement1);
 
 
 
@@ -259,6 +272,9 @@ GtkWidget *set_left_part(GtkWidget *sub_box_holder ){
     gtk_widget_set_halign(flowbox, GTK_ALIGN_FILL);
     gtk_widget_set_hexpand(flowbox, 1);
 
+    gtk_flow_box_set_max_children_per_line(GTK_FLOW_BOX(flowbox), 1);
+    gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(flowbox), GTK_SELECTION_NONE);
+
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window), flowbox);
 
 
@@ -288,11 +304,11 @@ static void button_add_ingr(GtkWidget *button, gpointer data){
 
     GtkWidget *flowbox = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(button)));
 
-    GtkWidget *paned = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(flowbox)))));
+    GtkWidget *paned = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(flowbox)))))));
 
     char *quantity = gtk_editable_get_chars(GTK_EDITABLE (entry), 0, 32);
 
-    //int quantite = atoi(quantity);
+    gtk_editable_delete_text(GTK_EDITABLE(entry), 0, -1);
 
     int id_ingr = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox), 0)))));
 
@@ -343,7 +359,15 @@ static void rigth_part_component(GtkWidget *sub_box_holder, passage_tab_t *passa
 
 
 
+    /*setup name_label*/
 
+    GtkWidget *name_label = gtk_label_new(passage_tab -> liste_ingredient -> tab_ingredient_unite[id_ingr] -> nom);
+
+    gtk_widget_set_halign(name_label, GTK_ALIGN_START);
+
+    gtk_widget_set_valign(name_label, GTK_ALIGN_CENTER);
+
+    gtk_flow_box_append(GTK_FLOW_BOX(box_holder), name_label);
 
 
 
@@ -512,8 +536,13 @@ GtkWidget *set_rigth_part(GtkWidget *sub_box_holder, passage_tab_t *passage_tab)
     GtkWidget *affiche_ingr = gtk_flow_box_new();
 
     gtk_widget_set_halign(affiche_ingr, GTK_ALIGN_FILL);
+    gtk_widget_set_hexpand(affiche_ingr, 1);
 
     gtk_widget_set_valign(affiche_ingr, GTK_ALIGN_FILL);
+    gtk_widget_set_vexpand(affiche_ingr, 1);
+
+    gtk_flow_box_set_max_children_per_line(GTK_FLOW_BOX(affiche_ingr), 1);
+    gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(affiche_ingr), GTK_SELECTION_NONE);
 
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window), affiche_ingr);
 
