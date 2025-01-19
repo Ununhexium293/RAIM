@@ -83,8 +83,6 @@ static void activate(GtkApplication *app, gpointer user_data){
     /*pages à ajouter*/
     GtkWidget *page_recette_1 = page_recette(stack, passage_tab);
 
-    GtkWidget *page_recette_2 = page_recette(stack, passage_tab);
-
     GtkWidget *page_ingredient_3 = page_ingredient(stack, passage_tab);
 
     GtkWidget *page_inventaire_4 = page_inventaire(stack, passage_tab);
@@ -141,26 +139,6 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     gtk_box_append(GTK_BOX(side_box), bouton1);
 
-    /*page_2*/
-
-    GtkWidget *bouton2 = gtk_button_new_with_label("page_2");
-
-    /*permet de changer de page*/
-
-    passage_changement_page *passe_page_2 = init_changement_page(stack, page_recette_2);
-
-    g_signal_connect(bouton2, "clicked", G_CALLBACK(page_show), passe_page_2);
-
-    /*permet de mettre à jour la page*/
-
-    update_page_t *update_page_recette2 = init_update_page(passage_tab, page_recette_2);
-
-    g_signal_connect(bouton2, "clicked", G_CALLBACK(update_visual_recette), update_page_recette2);
-
-    gtk_widget_set_halign(bouton2, GTK_ALIGN_FILL);
-
-    gtk_box_append(GTK_BOX(side_box), bouton2);
-
 
 
 
@@ -189,7 +167,7 @@ static void activate(GtkApplication *app, gpointer user_data){
 
     //page 4
 
-    GtkWidget *bouton4 = gtk_button_new_with_label("Iventaire");
+    GtkWidget *bouton4 = gtk_button_new_with_label("Inventaire");
 
     //Permet de changer de page
 

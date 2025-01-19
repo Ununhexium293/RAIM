@@ -13,7 +13,6 @@
 
 /*fonction setup partie gauche*/
 
-/*a faire : - bouton rm*/
 static void button_rm_ingr(GtkWidget *boutton, gpointer data){
     GtkWidget *box_container = gtk_widget_get_parent(boutton);
     GtkWidget *box_holder = gtk_widget_get_parent(gtk_widget_get_parent(box_container));
@@ -593,7 +592,7 @@ static void validate_button_function(GtkWidget *button, gpointer data){
     if (flowbox_child_i != NULL){
         GtkWidget *flowbox_child_last = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_last_child(flowbox1)));
 
-        if (flowbox_child_i != flowbox_child_last){
+        if (flowbox_child_i == flowbox_child_last){
             int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
             int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
 
@@ -605,7 +604,10 @@ static void validate_button_function(GtkWidget *button, gpointer data){
 
                 add_tab_ingredient(link, id, quantity);
 
-                flowbox_child_i = gtk_widget_get_next_sibling(flowbox_child_i);
+                flowbox_child_i = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_next_sibling(gtk_widget_get_parent(flowbox_child_i))));
+
+            printf("ok\n");
+            fflush(stdout);
             }
             int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
             int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
