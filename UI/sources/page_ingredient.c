@@ -149,21 +149,7 @@ void add_ingredient(GtkWidget *widget,  gpointer data){
     //Je crée une case d'inventaire pour le nouvel ingredient
     add_tab_ingredient(passage_tab -> liste_inventaire, passage_tab -> liste_ingredient  -> nb_ingredient -1, 0);
 
-    //IL MANQUE LA MAJ VISUELLE
-
-    //debug
-    //printf("%c\n\n\n", passage_tab -> liste_ingredient -> tab_ingredient_unite[3] -> unite);
-    //fflush(stdout);
-
-    /*GtkWidget* scroll_window = gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(box_on_top));
-    GtkWidget* flowbox = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(scroll_window))));
-
-
-    gtk_flow_box_remove_all(GTK_FLOW_BOX(flowbox));
-
-    for (int i = 0; i < passage_tab -> liste_ingredient -> nb_ingredient; i++){
-        init_affiche_ingredient(flowbox, i, passage_tab);
-    }*/
+    init_affiche_ingredient(gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_widget_get_parent(gtk_widget_get_parent(box_on_top))), 2)))))), passage_tab -> liste_ingredient -> nb_ingredient - 1, passage_tab);
 
 }
 
@@ -179,7 +165,31 @@ void add_ingredient(GtkWidget *widget,  gpointer data){
 
 
 
+static int filter(GtkFlowBoxChild *child, gpointer data){
+    char *str = data;
 
+    GtkWidget *box_holder = gtk_flow_box_child_get_child(child);
+    GtkWidget *container = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(box_holder), 1));
+    GtkWidget *label = gtk_widget_get_first_child(container);
+
+    const char *text = gtk_label_get_text(GTK_LABEL(label));
+
+    return filter_str(str, text);
+}
+
+
+static void search_filtre(GtkWidget *widget, gpointer data){
+
+    GtkWidget *flowbox1 = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(widget)));
+    GtkWidget *flowbox2 = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox1), 2))))));
+
+    char *str = gtk_editable_get_chars(GTK_EDITABLE(widget), 0, 32);
+
+    strlower(str);
+
+    gtk_flow_box_set_filter_func(GTK_FLOW_BOX(flowbox2), filter, str, lib_str);
+
+}
 
 
 
@@ -234,6 +244,8 @@ GtkWidget *page_ingredient(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_search_entry_set_search_delay(GTK_SEARCH_ENTRY(searchentry), 125);
 
     gtk_box_append(GTK_BOX(box_on_top), searchentry);
+
+    g_signal_connect(searchentry, "search_changed", G_CALLBACK(search_filtre), NULL);
 
 
     //setup text unite
