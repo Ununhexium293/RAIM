@@ -35,7 +35,7 @@ int filter_str(char * str1, char * str2){
 }
 
 
-int compare_str(char * str1, char * str2){
+int compare_str(const char * str1, const char * str2){
     /*str1 < str2 ===> -1
     str1 = str2 ===> 0
     str1 > str2 ===> 1*/

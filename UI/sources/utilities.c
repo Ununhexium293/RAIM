@@ -129,3 +129,22 @@ int filter_str(char * str1, const char * str2){
     return 0;
 
 }
+
+int compare_str(const char * str1, const char * str2){
+    /*str1 < str2 ===> -1
+    str1 = str2 ===> 0
+    str1 > str2 ===> 1*/
+
+    int i = 0;
+    while(str1[i]>=str2[i]){
+        if(str1[i] == str2[i]){
+            if(str1[i] == '\0'){
+                return 0;
+            }
+        }else{
+            return 1;
+        }
+        i++;
+    }
+    return -1;
+}

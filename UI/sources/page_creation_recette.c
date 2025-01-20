@@ -181,7 +181,12 @@ static void left_part_component(GtkWidget *sub_box_holder, passage_tab_t *passag
 
 
 
-
+static int sort_part_left(GtkFlowBoxChild *child1, GtkFlowBoxChild *child2, gpointer data){
+    GtkWidget *label1 = gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child1)), 1)));
+    GtkWidget *label2 = gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child2)), 1)));
+    
+    return compare_str(gtk_label_get_text(GTK_LABEL(label1)), gtk_label_get_text(GTK_LABEL(label2)));
+}
 
 
 
@@ -281,6 +286,8 @@ GtkWidget *set_left_part(GtkWidget *sub_box_holder ){
 
     gtk_flow_box_set_max_children_per_line(GTK_FLOW_BOX(flowbox), 1);
     gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(flowbox), GTK_SELECTION_NONE);
+
+    gtk_flow_box_set_sort_func(GTK_FLOW_BOX(flowbox), sort_part_left, NULL, NULL);
 
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window), flowbox);
 
@@ -493,7 +500,12 @@ static void search_filtre(GtkWidget *widget, gpointer data){
 
 
 
-
+static int sort_part_rigth(GtkFlowBoxChild *child1, GtkFlowBoxChild *child2, gpointer data){
+    GtkWidget *label1 = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child1)), 1));
+    GtkWidget *label2 = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child2)), 1));
+    
+    return compare_str(gtk_label_get_text(GTK_LABEL(label1)), gtk_label_get_text(GTK_LABEL(label2)));
+}
 
 
 
@@ -584,6 +596,8 @@ GtkWidget *set_rigth_part(GtkWidget *sub_box_holder, passage_tab_t *passage_tab)
 
     gtk_flow_box_set_max_children_per_line(GTK_FLOW_BOX(affiche_ingr), 1);
     gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(affiche_ingr), GTK_SELECTION_NONE);
+
+    gtk_flow_box_set_sort_func(GTK_FLOW_BOX(affiche_ingr), sort_part_rigth, NULL, NULL);
 
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrolled_window), affiche_ingr);
 

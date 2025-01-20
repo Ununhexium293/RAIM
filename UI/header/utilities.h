@@ -11,5 +11,6 @@ void strlower(char * str);
 
 int filter_str(char * str1, const char * str2);
 
+int compare_str(const char * str1, const char * str2);
 
 #endif
