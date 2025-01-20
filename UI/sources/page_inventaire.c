@@ -5,30 +5,7 @@
 #include "../header/struct_passage.h"
 #include "../header/struct_passage_gestion.h"
 #include "../../Data_gestion/header/gestion_types.h"
-
-/*a faire*/
-
-
-static int log_10(int n){
-    int count = 0;
-
-    while (n != 0){
-        n /= 10;
-        count++;
-    }
-
-    count--;
-
-    return count;
-}
-
-
-
-
-
-
-
-
+#include "../header/utilities.h"
 
 
 static void button_add_qt_inventaire(GtkWidget *widget, gpointer data);
@@ -254,8 +231,38 @@ static void button_add_qt_inventaire(GtkWidget *widget, gpointer data){
 
 
 
+static int filter(GtkFlowBoxChild *child, gpointer data){
+    char *str = data;
+
+    GtkWidget *box_holder = gtk_flow_box_child_get_child(child);
+    GtkWidget *container = gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(box_holder), 1));
+    GtkWidget *label = gtk_widget_get_first_child(container);
+
+    const char *text = gtk_label_get_text(GTK_LABEL(label));
+
+    return filter_str(str, text);
+}
 
 
+static void search_filtre(GtkWidget *widget, gpointer data){
+
+    GtkWidget *flowbox1 = gtk_widget_get_parent(gtk_widget_get_parent(gtk_widget_get_parent(widget)));
+    GtkWidget *flowbox2 = gtk_viewport_get_child(GTK_VIEWPORT(gtk_scrolled_window_get_child(GTK_SCROLLED_WINDOW(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox1), 2))))));
+
+    char *str = gtk_editable_get_chars(GTK_EDITABLE(widget), 0, 32);
+
+    strlower(str);
+
+    gtk_flow_box_set_filter_func(GTK_FLOW_BOX(flowbox2), filter, str, lib_str);
+}
+
+
+static int sort(GtkFlowBoxChild *child1, GtkFlowBoxChild *child2, gpointer data){
+    GtkWidget *label1 = gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child1)), 1)));
+    GtkWidget *label2 = gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child2)), 1)));
+    
+    return compare_str(gtk_label_get_text(GTK_LABEL(label1)), gtk_label_get_text(GTK_LABEL(label2)));
+}
 
 
 
@@ -311,23 +318,7 @@ GtkWidget *page_inventaire(GtkWidget *stack, passage_tab_t *passage_tab){
 
     gtk_box_append(GTK_BOX(box_on_top), searchentry);
 
-
-
-
-
-    /*setup add_button*/
-
-    /*GtkWidget *add_button = gtk_button_new_with_label("nouvelle inventaire");
-
-    gtk_widget_set_halign(add_button, GTK_ALIGN_END);
-
-    gtk_widget_set_size_request(add_button, 200, 50);
-    
-    gtk_box_append(GTK_BOX(box_on_top), add_button);
-
-    GtkWidget *page_sub = page_creation_recette(stack, flowbox1, passage_tab);
-
-    g_signal_connect(add_button, "clicked", G_CALLBACK(create_recipe), init_changement_page(stack, page_sub));*/
+    g_signal_connect(searchentry, "search_changed", G_CALLBACK(search_filtre), NULL);
 
 
 
@@ -371,6 +362,8 @@ GtkWidget *page_inventaire(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(flowbox2), GTK_SELECTION_NONE);
 
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrollwindow), flowbox2);
+
+    gtk_flow_box_set_sort_func(GTK_FLOW_BOX(flowbox2), sort, NULL, NULL);
 
     gtk_stack_add_child(GTK_STACK(stack), flowbox1);
 
