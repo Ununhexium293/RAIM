@@ -222,6 +222,14 @@ static void search_filtre(GtkWidget *widget, gpointer data){
 
 
 
+static int sort(GtkFlowBoxChild *child1, GtkFlowBoxChild *child2, gpointer data){
+    GtkWidget *label1 = gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child1)), 1)));
+    GtkWidget *label2 = gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(gtk_flow_box_child_get_child(child2)), 1)));
+    
+    return compare_str(gtk_label_get_text(GTK_LABEL(label1)), gtk_label_get_text(GTK_LABEL(label2)));
+}
+
+
 
 
 
@@ -324,6 +332,8 @@ GtkWidget *page_menu(GtkWidget *stack, passage_tab_t *passage_tab){
     gtk_flow_box_set_selection_mode(GTK_FLOW_BOX(flowbox2), GTK_SELECTION_NONE);
 
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(scrollwindow), flowbox2);
+
+    gtk_flow_box_set_sort_func(GTK_FLOW_BOX(flowbox2), sort, NULL, NULL);
 
     gtk_stack_add_child(GTK_STACK(stack), flowbox1);
 
