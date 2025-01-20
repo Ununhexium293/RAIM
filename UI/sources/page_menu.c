@@ -51,7 +51,7 @@ static void init_affiche_menu(GtkWidget *flowbox, int id_menu, passage_tab_t *pa
 
     free(num);
 
-    //gtk_widget_set_visible(label_num, 0);
+    gtk_widget_set_visible(label_num, 0);
 
     gtk_flow_box_append(GTK_FLOW_BOX(box_holder), label_num);
 
