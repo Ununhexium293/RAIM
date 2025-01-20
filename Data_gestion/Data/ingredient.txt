@@ -1,4 +1,5 @@
-elem = 3;
+elem = 4;
 qt=g nom= farine
 qt=g nom= beurre
 qt=n nom= oeufs
+qt=n nom= saucisse

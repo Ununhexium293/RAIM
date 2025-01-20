@@ -51,7 +51,7 @@ static void init_affiche_menu(GtkWidget *flowbox, int id_menu, passage_tab_t *pa
 
     free(num);
 
-    gtk_widget_set_visible(label_num, 0);
+    //gtk_widget_set_visible(label_num, 0);
 
     gtk_flow_box_append(GTK_FLOW_BOX(box_holder), label_num);
 
@@ -166,7 +166,7 @@ static void button_rm_menu(GtkWidget *widget, gpointer data){
 
     /*remove the recipe from data*/
     rm_menu(passage_tab, id_menu);
-    update_tab_inv(passage_tab,passage_tab  -> liste_link -> recette_ingredients[id_menu],1);
+    update_tab_inv(passage_tab,passage_tab  -> liste_link -> recette_ingredients[passage_tab -> liste_menu -> tb_int[id_menu]],1);
 
 
     /*update the visual*/

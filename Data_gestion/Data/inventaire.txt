@@ -1,4 +1,5 @@
-elem = 3;
-ing=1 qt=670;
-ing=2 qt=500;
-ing=3 qt=6;
+elem = 4;
+ing=1 qt=1430;
+ing=2 qt=920;
+ing=3 qt=20;
+ing=3 qt=0;

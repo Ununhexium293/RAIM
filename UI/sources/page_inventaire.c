@@ -215,10 +215,6 @@ static void button_add_qt_inventaire(GtkWidget *widget, gpointer data){
 
     gchar* valeur = gtk_editable_get_chars(GTK_EDITABLE(GTK_ENTRY(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(box_container))))),0,32);
 
-    printf("%s",valeur);
-
-    
-    printf("CACA\n\n\n");
     fflush(stdout);
 
     int quantite = atoi(valeur);

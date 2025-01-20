@@ -108,8 +108,6 @@ int filter_str(char * str1, const char * str2){
             len2++;
         }
 
-        printf("%d:%d\n",len1,len2);
-        printf("%c%c%c",str1[0],str1[1],str1[2]);
         if(len1>len2){
             return 0;
         }
@@ -118,7 +116,6 @@ int filter_str(char * str1, const char * str2){
         int i,j;
         for(i = 0;i<len2-len1+1;i++){
             for(j = 0; j<len1 ; j++){
-                printf("val : %c:%c\n",str1[j],str2[j+i]);
                 if(str1[j]!=str2[j+i]){
                     break;
                 }

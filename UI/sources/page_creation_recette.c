@@ -621,9 +621,11 @@ static void validate_button_function(GtkWidget *button, gpointer data){
 
     tab_ingredients_t *link = init_tab_ingredient(1);
 
-    GtkWidget *flowbox_child_i = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_first_child(flowbox1)));
+    GtkWidget *flowbox_child_i = gtk_widget_get_first_child(flowbox1);
 
     if (flowbox_child_i != NULL){
+        flowbox_child_i = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(flowbox_child_i));
+
         GtkWidget *flowbox_child_last = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_last_child(flowbox1)));
 
         if (flowbox_child_i == flowbox_child_last){
@@ -636,18 +638,21 @@ static void validate_button_function(GtkWidget *button, gpointer data){
                 int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
                 int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
 
-                add_tab_ingredient(link, id, quantity);
+                add_tab_ingredient(link, id + 1, quantity);
 
                 flowbox_child_i = gtk_flow_box_child_get_child(GTK_FLOW_BOX_CHILD(gtk_widget_get_next_sibling(gtk_widget_get_parent(flowbox_child_i))));
-
-            printf("ok\n");
-            fflush(stdout);
             }
             int id = atoi(gtk_label_get_text(GTK_LABEL(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 0)))));
             int quantity = atoi(gtk_label_get_text(GTK_LABEL(gtk_widget_get_next_sibling(gtk_widget_get_next_sibling(gtk_widget_get_first_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(flowbox_child_i), 1))))))));
 
             add_tab_ingredient(link, id + 1, quantity);
         }
+    }else{
+        gtk_editable_delete_text(GTK_EDITABLE(gtk_widget_get_last_child(gtk_flow_box_child_get_child(gtk_flow_box_get_child_at_index(GTK_FLOW_BOX(container), 0)))), 0, -1);
+        gtk_stack_set_visible_child(passage -> changement -> stack, passage -> changement -> page);
+        free_tab_ingredient(link);
+        
+        return;
     }
 
     add_tab_recette(passage -> passage_tab -> liste_link, link);
